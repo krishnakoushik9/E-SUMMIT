@@ -490,84 +490,92 @@
     </section>
 
     <script>
-        // Three.js Animation with Enhanced Visuals
-        const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
+    // Three.js Animation with Enhanced Visuals
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+const renderer = new THREE.WebGLRenderer({
+    canvas: document.querySelector('#three-canvas'),
+    alpha: true,
+    antialias: true
+});
+
+// Set renderer size to match viewport
+function updateRendererSize() {
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     
-    const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#three-canvas'),
-        alpha: true,
-        antialias: true  // Added for smoother rendering
-    });
+    // Update camera aspect ratio
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+}
+
+// Initial size setup
+updateRendererSize();
+
+// Create particles
+const particlesGeometry = new THREE.BufferGeometry();
+const particlesCount = 7000;
+const posArray = new Float32Array(particlesCount * 3);
+
+// Distribute particles across the entire visible space
+for(let i = 0; i < particlesCount * 3; i += 3) {
+    posArray[i] = (Math.random() - 0.5) * 20;
+    posArray[i + 1] = (Math.random() - 0.5) * 20;
+    posArray[i + 2] = (Math.random() - 0.5) * 20;
+}
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.03,
+    color: '#00f2ff',
+    transparent: true,
+    opacity: 0.8,
+    blending: THREE.AdditiveBlending,
+    sizeAttenuation: true
+});
+
+const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particlesMesh);
+
+camera.position.z = 8;
+
+// Mouse interaction variables
+let mouseX = 0;
+let mouseY = 0;
+
+document.addEventListener('mousemove', (event) => {
+    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+});
+
+// Add time variable for automatic rotation
+let time = 0;
+
+// Enhanced animation function
+function animate() {
+    requestAnimationFrame(animate);
     
-    // Set renderer size to match viewport
-    function updateRendererSize() {
-        renderer.setSize(window.innerWidth, window.innerHeight, false);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        
-        // Update camera aspect ratio
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-    }
+    // Increment time
+    time += 0.001;
     
-    // Initial size setup
-    updateRendererSize();
+    // Automatic rotation
+    particlesMesh.rotation.y += 0.002;  // Constant Y-axis rotation
+    particlesMesh.rotation.x += 0.001;  // Constant X-axis rotation
     
-    // Create particles
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 7000;  // Increased for better coverage
-    const posArray = new Float32Array(particlesCount * 3);
+    // Add wave-like motion using sine waves
+    particlesMesh.position.y = Math.sin(time) * 0.2;  // Gentle vertical wave
+    particlesMesh.position.x = Math.cos(time) * 0.2;  // Gentle horizontal wave
     
-    // Distribute particles across the entire visible space
-    for(let i = 0; i < particlesCount * 3; i += 3) {
-        // Spread particles more evenly across the viewport
-        posArray[i] = (Math.random() - 0.5) * 20;     // X coordinate
-        posArray[i + 1] = (Math.random() - 0.5) * 20; // Y coordinate
-        posArray[i + 2] = (Math.random() - 0.5) * 20; // Z coordinate
-    }
+    // Blend mouse interaction with automatic rotation
+    particlesMesh.rotation.y += (mouseX * 0.1 - particlesMesh.rotation.y) * 0.02;
+    particlesMesh.rotation.x += (mouseY * 0.1 - particlesMesh.rotation.x) * 0.02;
     
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    
-    const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.03,  // Slightly larger particles
-        color: '#00f2ff',
-        transparent: true,
-        opacity: 0.8,
-        blending: THREE.AdditiveBlending,
-        sizeAttenuation: true
-    });
-    
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particlesMesh);
-    
-    // Position camera to see more particles
-    camera.position.z = 8;
-    
-    // Enhanced mouse interaction
-    let mouseX = 0;
-    let mouseY = 0;
-    
-    document.addEventListener('mousemove', (event) => {
-        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-    });
-    
-    // Smooth animation
-    function animate() {
-        requestAnimationFrame(animate);
-        
-        // Rotate based on mouse position with smoother movement
-        particlesMesh.rotation.y += (mouseX * 0.2 - particlesMesh.rotation.y) * 0.05;
-        particlesMesh.rotation.x += (mouseY * 0.2 - particlesMesh.rotation.x) * 0.05;
-        
-        // Continuous gentle rotation
-        particlesMesh.rotation.y += 0.4;
-        particlesMesh.rotation.x += 0.4;
-        
-        renderer.render(scene, camera);
-    }
-    
-    animate();
+    renderer.render(scene, camera);
+}
+
+animate();
 
         // Countdown Timer
         function updateTimer() {
