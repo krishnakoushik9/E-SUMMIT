@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMRCET E-Summit 2025</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-purple: #b300ff;
+            --neon-pink: #ff00c8;
+            --dark-bg: #0a0a0f;
+            --cyber-green: #00ff9d;
+            --text-glow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* Header and Navigation */
+        header {
+            position: fixed;
+            width: 100%;
+            padding: 1rem;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--neon-blue);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--neon-blue);
+            text-shadow: var(--text-glow);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #three-canvas {
+        position: fixed;  /* Changed from absolute to fixed */
+        top: 0;
+        left: 0;
+        width: 100vw !important;  /* Force full viewport width */
+        height: 100vh !important; /* Force full viewport height */
+        z-index: 1;
+    }
+
+    .hero-content {
+        background: rgba(10, 10, 15, 0.3);
+        padding: 2rem;
+        border-radius: 15px;
+        backdrop-filter: blur(5px);
+    }
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            text-shadow: var(--text-glow);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--cyber-green);
+            margin-bottom: 2rem;
+        }
+
+        /* Timer */
+        #timer {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .timer-item {
+            background: rgba(0, 242, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--neon-blue);
+            min-width: 120px;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+
+        .timer-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--neon-purple);
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(179, 0, 255, 0.5);
+        }
+
+        /* Schedule */
+        .schedule-day {
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid var(--neon-blue);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .schedule-day:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+        }
+
+        .schedule-title {
+            color: var(--cyber-green);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .schedule-item {
+            border-left: 2px solid var(--neon-blue);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        /* Tickets */
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .ticket-card {
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid var(--neon-blue);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .ticket-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+        }
+
+        .price {
+            font-size: 2rem;
+            color: var(--neon-pink);
+            margin: 1rem 0;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Guests */
+        .guest-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .guest-card {
+            background: rgba(179, 0, 255, 0.05);
+            border: 1px solid var(--neon-purple);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .guest-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(179, 0, 255, 0.2);
+        }
+
+        .guest-name {
+            color: var(--neon-purple);
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+        }
+
+        /* Competitions */
+        .competition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .competition-card {
+            background: rgba(0, 255, 157, 0.05);
+            border: 1px solid var(--cyber-green);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            #timer {
+                gap: 1rem;
+            }
+
+            .timer-item {
+                min-width: 80px;
+                padding: 1rem;
+            }
+
+            .timer-value {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">CMRCET E-SUMMIT</div>
+            <a href="#tickets" class="cta-button">Register Now</a>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <canvas id="three-canvas"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title">CMRCET E-Summit Fest 2025</h1>
+            <h2 class="hero-subtitle">IGNITE INNOVATION | EMPOWER VISIONARIES</h2>
+            <div id="timer">
+                <div class="timer-item">
+                    <div class="timer-value" id="days">00</div>
+                    <div class="timer-label">Days</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-value" id="hours">00</div>
+                    <div class="timer-label">Hours</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-value" id="minutes">00</div>
+                    <div class="timer-label">Minutes</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-value" id="seconds">00</div>
+                    <div class="timer-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="schedule">
+        <h2 class="section-title">Event Schedule</h2>
+        <div class="schedule-day">
+            <h3 class="schedule-title">Day 1: IGNITE INNOVATION</h3>
+            <div class="schedule-item">
+                <h4>Inauguration Ceremony</h4>
+                <p>10:00 AM - 11:00 AM</p>
+            </div>
+            <div class="schedule-item">
+                <h4>Keynote Session</h4>
+                <p>11:00 AM - 12:30 PM</p>
+            </div>
+            <div class="schedule-item">
+                <h4>Lunch Break & Startup Expo</h4>
+                <p>12:30 PM - 1:10 PM</p>
+            </div>
+            <div class="schedule-item">
+                <h4>Competitions</h4>
+                <p>1:10 PM - 4:00 PM</p>
+            </div>
+            <div class="schedule-item">
+                <h4>Prize Distribution</h4>
+                <p>4:00 PM - 5:00 PM</p>
+            </div>
+        </div>
+
+        <div class="schedule-day">
+            <h3 class="schedule-title">Day 2: EMPOWER VISIONARIES</h3>
+            <div class="schedule-item">
+                <h4>Famous Guy's Talk Show</h4>
+                <p>10:30 AM - 11:30 AM</p>
+            </div>
+            <div class="schedule-item">
+                <h4>Panel Discussion</h4>
+                <p>11:30 AM - 12:30 PM</p>
+            </div>
+            <div class="schedule-item">
+                <h4>Lunch & Expo Continues</h4>
+                <p>12:30 PM - 1:30 PM</p>
+            </div>
+            <div class="schedule-item">
+                <h4>Competitions</h4>
+                <p>1:30 PM - 3:30 PM</p>
+            </div>
+            <div class="schedule-item">
+                <h4>Standup Comedy Show</h4>
+                <p>3:30 PM - 4:30 PM</p>
+            </div>
+            <div class="schedule-item">
+                <h4>Closing Ceremony & Prize Distribution</h4>
+                <p>4:30 PM - 6:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tickets">
+        <h2 class="section-title">Get Your Tickets</h2>
+        <div class="ticket-grid">
+            <div class="ticket-card">
+                <h3>Day 1 Pass</h3>
+                <div class="price">₹150</div>
+                <p>Access to all Day 1 events</p>
+                <p>500 passes available</p>
+                <button class="cta-button">Buy Now</button>
+            </div>
+            <div class="ticket-card">
+                <h3>Full Event Pass</h3>
+                <div class="price">₹250</div>
+                <p>Access to both Day 1 & 2 events</p>
+                <p>500 passes available</p>
+                <button class="cta-button">Buy Now</button>
+            </div>
+            <div class="ticket-card">
+                <h3>Day 2 Pass</h3>
+                <div class="price">₹200</div>
+                <p>Access to all Day 2 events</p>
+                <p>300 passes available</p>
+                <button class="cta-button">Buy Now</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="stalls">
+        <h2 class="section-title">Stall Rentals</h2>
+        <div class="ticket-grid">
+            <div class="ticket-card">
+                <h3>Regular Stall</h3>
+                <div class="price">₹2,500</div>
+                <p>Standard exhibition space</p>
+                <p>10 stalls available</p>
+                <button class="cta-button">Book Now</button>
+            </div>
+            <div class="ticket-card">
+                <h3>Premium Stall</h3>
+                <div class="price">₹5,000</div>
+                <p>Premium location and larger space</p>
+                <p>10 stalls available</p>
+                <button class="cta-button">Book Now</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="competitions">
+        <h2 class="section-title">Competitions</h2>
+        <div class="competition-grid">
+            <div class="competition-card">
+                <h3>IPL Auction</h3>
+                <p>Test your team building and budget management skills</p>
+                <div class="price">₹50</div>
+                <button class="cta-button">Register</button>
+            </div>
+            <div class="competition-card">
+                <h3>Startup Pitch</h3>
+                <p>Present your innovative ideas to industry experts</p>
+                <div class="price">₹50</div>
+                <button class="cta-button">Register</button>
+            </div>
+            <div class="competition-card">
+                <h3>Virtual Stock Market</h3>
+                <p>Experience the thrill of trading in a simulated environment</p>
+                <div class="price">₹50</div>
+                <button class="cta-button">Register</button>
+            </div>
+            <div class="competition-card">
+                <h3>Startup Challenge</h3>
+                <p>Special category for college students</p>
+                <div class="price">₹50</div>
+                <button class="cta-button">Register</button>
+            </div>
+            <div class="competition-card">
+                <h3>Ace the Case</h3>
+                <p>Solve real-world business challenges</p>
+                <div class="price">₹50</div>
+                <button class="cta-button">Register</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="guests">
+        <h2 class="section-title">Guest Speakers</h2>
+        <div class="guest-grid">
+            <div class="guest-card">
+                <h3 class="guest-name">Vamshi Kurapati</h3>
+                <p>Raw Talks</p>
+                <p>Entrepreneurship Journey & Insights</p>
+            </div>
+            <div class="guest-card">
+                <h3 class="guest-name">Nikhil Gunda</h3>
+                <p>Gear Head Motors</p>
+                <p>Innovation in Automotive Industry</p>
+            </div>
+            <div class="guest-card">
+                <h3 class="guest-name">Meraj Faheem</h3>
+                <p>Edventure Park</p>
+                <p>EdTech Revolution</p>
+            </div>
+            <div class="guest-card">
+                <h3 class="guest-name">Varun Mayya</h3>
+                <p>Entrepreneurship & Digital Innovation</p>
+                <p>Future of Work</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Three.js Animation with Enhanced Visuals
+        const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
+    
+    const renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector('#three-canvas'),
+        alpha: true,
+        antialias: true  // Added for smoother rendering
+    });
+    
+    // Set renderer size to match viewport
+    function updateRendererSize() {
+        renderer.setSize(window.innerWidth, window.innerHeight, false);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        
+        // Update camera aspect ratio
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    }
+    
+    // Initial size setup
+    updateRendererSize();
+    
+    // Create particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 7000;  // Increased for better coverage
+    const posArray = new Float32Array(particlesCount * 3);
+    
+    // Distribute particles across the entire visible space
+    for(let i = 0; i < particlesCount * 3; i += 3) {
+        // Spread particles more evenly across the viewport
+        posArray[i] = (Math.random() - 0.5) * 20;     // X coordinate
+        posArray[i + 1] = (Math.random() - 0.5) * 20; // Y coordinate
+        posArray[i + 2] = (Math.random() - 0.5) * 20; // Z coordinate
+    }
+    
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.03,  // Slightly larger particles
+        color: '#00f2ff',
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+        sizeAttenuation: true
+    });
+    
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particlesMesh);
+    
+    // Position camera to see more particles
+    camera.position.z = 8;
+    
+    // Enhanced mouse interaction
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    document.addEventListener('mousemove', (event) => {
+        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    });
+    
+    // Smooth animation
+    function animate() {
+        requestAnimationFrame(animate);
+        
+        // Rotate based on mouse position with smoother movement
+        particlesMesh.rotation.y += (mouseX * 0.2 - particlesMesh.rotation.y) * 0.05;
+        particlesMesh.rotation.x += (mouseY * 0.2 - particlesMesh.rotation.x) * 0.05;
+        
+        // Continuous gentle rotation
+        particlesMesh.rotation.y += 0.03;
+        particlesMesh.rotation.x += 0.03;
+        
+        renderer.render(scene, camera);
+    }
+    
+    animate();
+
+        // Countdown Timer
+        function updateTimer() {
+            const eventDate = new Date('February 21, 2025 10:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Responsive canvas
+        window.addEventListener('resize', () => {
+        updateRendererSize();
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
