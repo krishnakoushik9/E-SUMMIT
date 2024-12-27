@@ -561,16 +561,16 @@ function animate() {
     time += 0.001;
     
     // Automatic rotation
-    particlesMesh.rotation.y += 0.09;  // Constant Y-axis rotation
-    particlesMesh.rotation.x += 0.07;  // Constant X-axis rotation
+    particlesMesh.rotation.y += 0.3;  // Constant Y-axis rotation
+    particlesMesh.rotation.x += 0.3;  // Constant X-axis rotation
     
     // Add wave-like motion using sine waves
     particlesMesh.position.y = Math.sin(time) * 0.2;  // Gentle vertical wave
     particlesMesh.position.x = Math.cos(time) * 0.2;  // Gentle horizontal wave
     
     // Blend mouse interaction with automatic rotation
-    particlesMesh.rotation.y += (mouseX * 0.1 - particlesMesh.rotation.y) * 0.02;
-    particlesMesh.rotation.x += (mouseY * 0.1 - particlesMesh.rotation.x) * 0.02;
+    particlesMesh.rotation.y += (mouseX * 0.1 - particlesMesh.rotation.y) * 0.1;
+    particlesMesh.rotation.x += (mouseY * 0.1 - particlesMesh.rotation.x) * 0.1;
     
     renderer.render(scene, camera);
 }
