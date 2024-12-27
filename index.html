@@ -31,8 +31,12 @@
             font-family: 'Rajdhani', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
+            overflow-y: scroll;
         }
 
+        body::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in WebKit browsers */
+}
         h1, h2, h3, h4 {
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
@@ -98,13 +102,7 @@
         }
 
 
-    .example::-webkit-scrollbar {
-        display: none; 
-    }
-    .example {
-    -ms-overflow-style: none; 
-    scrollbar-width: none; 
-    }
+
 
         
         .hero-subtitle {
@@ -301,7 +299,7 @@
         }
     </style>
 </head>
-<body>
+<>
     <header>
         <nav>
             <div class="logo">CMRCET E-SUMMIT</div>
