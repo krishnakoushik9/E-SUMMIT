@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitions - CMRCET E-Summit 2025</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0f;
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .competition-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #00f2ff;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+
+        .dropdown {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .dropdown-button {
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 1rem;
+            width: 100%;
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-button:hover {
+            background: rgba(0, 242, 255, 0.2);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            width: 100%;
+            z-index: 1;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-content a {
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+            font-family: 'Rajdhani', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(0, 242, 255, 0.2);
+        }
+
+        .ticket-quantity {
+            margin-bottom: 1.5rem;
+        }
+
+        .ticket-quantity label {
+            font-size: 1rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .ticket-quantity input {
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 0.75rem;
+            width: 100%;
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+        }
+
+        .ticket-quantity input:focus {
+            outline: none;
+            border-color: #00f2ff;
+        }
+
+        .total-price {
+            font-size: 1.2rem;
+            color: #00f2ff;
+            margin-bottom: 1.5rem;
+        }
+
+        .buy-button {
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #00f2ff, #b300ff);
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .buy-button:hover {
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            margin-top: 1rem;
+        }
+
+        .back-button a {
+            color: #00f2ff;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .back-button a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="competition-container">
+        <h1>Competitions</h1>
+        <div class="dropdown">
+            <button class="dropdown-button" onclick="toggleDropdown()">Select Competition</button>
+            <div class="dropdown-content" id="dropdownContent">
+                <a href="#" onclick="selectCompetition('IPL Auction')">IPL Auction</a>
+                <a href="#" onclick="selectCompetition('Startup Pitch')">Startup Pitch</a>
+                <a href="#" onclick="selectCompetition('Virtual Stock Market')">Virtual Stock Market</a>
+                <a href="#" onclick="selectCompetition('Startup Challenge')">Startup Challenge</a>
+                <a href="#" onclick="selectCompetition('Ace the Case')">Ace the Case</a>
+            </div>
+        </div>
+        <div class="ticket-quantity">
+            <label for="quantity">Number of Tickets (Max 3):</label>
+            <input type="number" id="quantity" min="1" max="3" value="1" onchange="updateTotalPrice()">
+        </div>
+        <div class="total-price" id="totalPrice">Total Price: ₹50</div>
+        <button class="buy-button" onclick="buyTickets()">Buy Now</button>
+        <div class="back-button">
+            <a href="index.html">Back to Main Page</a>
+        </div>
+    </div>
+
+    <script>
+        // Dropdown functionality
+        function toggleDropdown() {
+            const dropdownContent = document.getElementById('dropdownContent');
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function selectCompetition(competition) {
+            document.querySelector('.dropdown-button').textContent = competition;
+            toggleDropdown();
+        }
+
+        // Update total price
+        function updateTotalPrice() {
+            const quantity = document.getElementById('quantity').value;
+            const totalPrice = quantity * 50;
+            document.getElementById('totalPrice').textContent = `Total Price: ₹${totalPrice}`;
+        }
+
+        // Buy tickets
+        function buyTickets() {
+            const competition = document.querySelector('.dropdown-button').textContent;
+            const quantity = document.getElementById('quantity').value;
+            alert(`You have successfully purchased ${quantity} ticket(s) for ${competition}!\n\nNote: No Razorpay integration yet. Please wait for the full website launch.`);
+        }
+    </script>
+</body>
+</html>

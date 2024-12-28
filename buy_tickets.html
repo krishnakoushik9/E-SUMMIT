@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Tickets - CMRCET E-Summit 2025</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0f;
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .ticket-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #00f2ff;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+
+        .ticket-option {
+            margin-bottom: 1.5rem;
+        }
+
+        .ticket-option h3 {
+            font-size: 1.5rem;
+            color: #00ff9d;
+            margin-bottom: 0.5rem;
+        }
+
+        .ticket-option p {
+            font-size: 1rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .ticket-option button {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(45deg, #00f2ff, #b300ff);
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .ticket-option button:hover {
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            margin-top: 1rem;
+        }
+
+        .back-button a {
+            color: #00f2ff;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .back-button a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket-container">
+        <h1>Buy Tickets</h1>
+        <div class="ticket-option">
+            <h3>Day 1 Pass</h3>
+            <p>Access to all Day 1 events</p>
+            <button onclick="buyTicket('Day 1 Pass')">Buy Now</button>
+        </div>
+        <div class="ticket-option">
+            <h3>Full Event Pass</h3>
+            <p>Access to both Day 1 & 2 events</p>
+            <button onclick="buyTicket('Full Event Pass')">Buy Now</button>
+        </div>
+        <div class="ticket-option">
+            <h3>Day 2 Pass</h3>
+            <p>Access to all Day 2 events</p>
+            <button onclick="buyTicket('Day 2 Pass')">Buy Now</button>
+        </div>
+        <div class="back-button">
+            <a href="index.html">Back to Main Page</a>
+        </div>
+    </div>
+
+    <script>
+        function buyTicket(ticketType) {
+            alert(`You have successfully purchased the ${ticketType}!`);
+            // Redirect to a payment gateway or confirmation page
+        }
+    </script>
+</body>
+</html>
