@@ -551,7 +551,7 @@
 
         // Create particles
         const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 12000;
+        const particlesCount = 5000;
         const posArray = new Float32Array(particlesCount * 3);
 
         // Distribute particles across the entire visible space
@@ -593,7 +593,7 @@
 
    // Countdown Timer
    function updateTimer() {
-            const eventDate = new Date('February 21, 2025 10:00:00').getTime();
+            const eventDate = new Date('February 21, 2025 9:10:00').getTime();
             const now = new Date().getTime();
             const distance = eventDate - now;
 
