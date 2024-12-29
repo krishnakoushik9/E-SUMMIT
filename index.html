@@ -590,7 +590,7 @@
     
 
     <script>
-     // Three.js Animation with Automatic Rotation
+        // Three.js Animation with Automatic Rotation
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({
@@ -639,12 +639,15 @@ const firecrackerPositions = new Float32Array(firecrackerCount * 3);
 const firecrackerVelocities = new Float32Array(firecrackerCount * 3);
 
 for (let i = 0; i < firecrackerCount * 3; i += 3) {
-    firecrackerPositions[i] = 0;
-    firecrackerPositions[i + 1] = 0;
-    firecrackerPositions[i + 2] = 0;
-    firecrackerVelocities[i] = (Math.random() - 0.5) * 0.2;
-    firecrackerVelocities[i + 1] = Math.random() * 0.2;
-    firecrackerVelocities[i + 2] = (Math.random() - 0.5) * 0.2;
+    // Slightly random initial positions around the center
+    firecrackerPositions[i] = (Math.random() - 0.5) * 0.1;
+    firecrackerPositions[i + 1] = (Math.random() - 0.5) * 0.1;
+    firecrackerPositions[i + 2] = (Math.random() - 0.5) * 0.1;
+    
+    // Random velocities in all directions
+    firecrackerVelocities[i] = (Math.random() - 0.5) * 0.4;
+    firecrackerVelocities[i + 1] = (Math.random() - 0.5) * 0.4;
+    firecrackerVelocities[i + 2] = (Math.random() - 0.5) * 0.4;
 }
 
 firecrackerGeometry.setAttribute('position', new THREE.BufferAttribute(firecrackerPositions, 3));
@@ -654,12 +657,20 @@ const firecrackerMaterial = new THREE.PointsMaterial({
     transparent: true,
     opacity: 1,
     blending: THREE.AdditiveBlending,
-    sizeAttenuation: true,
-    depthTest: false // Prevent depth issues
+    depthTest: true,
+    sizeAttenuation: true
 });
 const firecrackerParticles = new THREE.Points(firecrackerGeometry, firecrackerMaterial);
 firecrackerParticles.visible = false; // Initially hidden
 scene.add(firecrackerParticles);
+
+// Ensure the camera is looking at the origin
+camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+// Adjust camera near and far planes if necessary
+camera.near = 0.1;
+camera.far = 1000;
+camera.updateProjectionMatrix();
 
 function animate() {
     requestAnimationFrame(animate);
@@ -700,12 +711,12 @@ function resetFirecrackers() {
     const positions = firecrackerParticles.geometry.attributes.position.array;
     const velocities = firecrackerVelocities;
     for (let i = 0; i < positions.length; i += 3) {
-        positions[i] = 0;
-        positions[i + 1] = 0; // Start from the center
-        positions[i + 2] = 0;
-        velocities[i] = (Math.random() - 0.5) * 0.2;
-        velocities[i + 1] = Math.random() * 0.2;
-        velocities[i + 2] = (Math.random() - 0.5) * 0.2;
+        positions[i] = (Math.random() - 0.5) * 0.1;
+        positions[i + 1] = (Math.random() - 0.5) * 0.1;
+        positions[i + 2] = (Math.random() - 0.5) * 0.1;
+        velocities[i] = (Math.random() - 0.5) * 0.4;
+        velocities[i + 1] = (Math.random() - 0.5) * 0.4;
+        velocities[i + 2] = (Math.random() - 0.5) * 0.4;
     }
     firecrackerParticles.geometry.attributes.position.needsUpdate = true;
     firecrackerMaterial.opacity = 1;
@@ -732,6 +743,7 @@ document.getElementById('surpriseButton').addEventListener('click', () => {
     firecrackerSound.play();
     animateFirecrackers();
 });
+    
     </script>
 </body>
 </html>
