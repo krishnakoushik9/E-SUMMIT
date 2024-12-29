@@ -643,41 +643,7 @@ const renderer = new THREE.WebGLRenderer({
     antialias: true
 });
 
-function submitCTFFlag() {
-        const encodedFlag = getComputedStyle(document.documentElement).getPropertyValue('--ctf-flag').trim();
-        const decodedFlag = atob(encodedFlag); // Decodes to "FREE_PASS_FOOD_GUESTS"
-        const userInput = document.getElementById('flag-input').value;
-        if (userInput === decodedFlag) {
-            window.location.href = atob("aHR0cHM6Ly90Lmx5L2k0eWtCP3I9cXI="); // Base64 for "https://t.ly/i4ykB?r=qr"
-        } else {
-            alert("Incorrect flag. Try again!");
-        }
-    }
 
-    // Function to make the input box jump
-    function makeInputJump() {
-        const inputBox = document.getElementById('flag-input');
-        inputBox.style.animation = 'jump 0.5s ease';
-        setTimeout(() => {
-            inputBox.style.animation = '';
-        }, 500);
-    }
-
-    // Add event listeners for mouse clicks
-    const inputBox = document.getElementById('flag-input');
-    inputBox.addEventListener('mousedown', (event) => {
-        if (event.button === 0) { // Left mouse click
-            makeInputJump();
-        } else if (event.button === 2) { // Right mouse click
-            event.preventDefault(); // Prevent context menu
-            inputBox.focus(); // Allow text input
-        }
-    });
-
-    // Prevent context menu on right-click
-    inputBox.addEventListener('contextmenu', (event) => {
-        event.preventDefault();
-    });
 
 function updateRendererSize() {
     renderer.setSize(window.innerWidth, window.innerHeight, false);
@@ -855,6 +821,41 @@ document.getElementById('surpriseButton').addEventListener('click', () => {
     firecrackerSound.play();
     animateFirecrackers();
 });
+        function submitCTFFlag() {
+        const encodedFlag = getComputedStyle(document.documentElement).getPropertyValue('--ctf-flag').trim();
+        const decodedFlag = atob(encodedFlag); // Decodes to "FREE_PASS_FOOD_GUESTS"
+        const userInput = document.getElementById('flag-input').value;
+        if (userInput === decodedFlag) {
+            window.location.href = atob("aHR0cHM6Ly90Lmx5L2k0eWtCP3I9cXI="); // Base64 for "https://t.ly/i4ykB?r=qr"
+        } else {
+            alert("Incorrect flag. Try again!");
+        }
+    }
+
+    // Function to make the input box jump
+    function makeInputJump() {
+        const inputBox = document.getElementById('flag-input');
+        inputBox.style.animation = 'jump 0.5s ease';
+        setTimeout(() => {
+            inputBox.style.animation = '';
+        }, 500);
+    }
+
+    // Add event listeners for mouse clicks
+    const inputBox = document.getElementById('flag-input');
+    inputBox.addEventListener('mousedown', (event) => {
+        if (event.button === 0) { // Left mouse click
+            makeInputJump();
+        } else if (event.button === 2) { // Right mouse click
+            event.preventDefault(); // Prevent context menu
+            inputBox.focus(); // Allow text input
+        }
+    });
+
+    // Prevent context menu on right-click
+    inputBox.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    });
     
     </script>
 </body>
