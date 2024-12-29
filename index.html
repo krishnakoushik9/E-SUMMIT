@@ -16,18 +16,14 @@
             box-sizing: border-box;
         }
 
-
         #three-canvas {
-    pointer-events: none;
-}
+            pointer-events: none;
+        }
 
-        
-        
         :root {
             --neon-blue: #00f2ff;
             --neon-purple: #b300ff;
             --dark-bg: #0a0a0f;
-            --ctf-flag: "RlJFRV9QQVNTX0ZPT0RfR1VFU1RT";
             --cyber-green: #00ff9d;
             --text-glow: 0 0 10px rgba(0, 242, 255, 0.5);
             --glass-bg: rgba(255, 255, 255, 0.1);
@@ -79,8 +75,6 @@
             color: var(--neon-blue);
             text-shadow: var(--text-glow);
         }
-
-        
 
         /* Hero Section */
         #hero {
@@ -248,11 +242,6 @@
             box-shadow: var(--glass-shadow);
         }
 
-
-        
-        
-
-        
         .guest-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 30px rgba(179, 0, 255, 0.2);
@@ -337,38 +326,39 @@
             }
 
             /* Credits Section */
-        #credits {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 2px solid var(--neon-blue);
-            margin-top: 5rem;
+            #credits {
+                text-align: center;
+                padding: 2rem;
+                background: rgba(10, 10, 15, 0.95);
+                backdrop-filter: blur(10px);
+                border-top: 2px solid var(--neon-blue);
+                margin-top: 5rem;
+            }
+
+            #credits p {
+                font-size: 1rem;
+                color: var(--neon-blue);
+                margin-bottom: 1rem;
+            }
+
+            #credits button {
+                padding: 0.5rem 1rem;
+                background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+                color: #ffffff;
+                border: none;
+                border-radius: 30px;
+                font-family: 'Orbitron', sans-serif;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            #credits button:hover {
+                transform: scale(1.05);
+            }
         }
 
-        #credits p {
-            font-size: 1rem;
-            color: var(--neon-blue);
-            margin-bottom: 1rem;
-        }
-
-        #credits button {
-            padding: 0.5rem 1rem;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            color: #ffffff;
-            border: none;
-            border-radius: 30px;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        #credits button:hover {
-            transform: scale(1.05);
-           }
-    }
-         /* Surprise */
-         #surpriseButton {
+        /* Surprise */
+        #surpriseButton {
             padding: 1rem 2rem;
             background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
             color: #ffffff;
@@ -387,42 +377,54 @@
             box-shadow: 0 0 30px rgba(0, 242, 255, 0.8);
         }
 
-        #ctf-challenge {
-        text-align: center;
-        padding: 2rem;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-        margin: 2rem auto;
-        max-width: 600px;
-    }
+        /* CTF Challenge */
+        #ctfChallenge {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid var(--neon-blue);
+            margin-top: 5rem;
+        }
 
-    #flag-input {
-        padding: 0.5rem;
-        font-size: 1rem;
-        border: 2px solid var(--neon-blue);
-        border-radius: 5px;
-        background: transparent;
-        color: white;
-        margin-bottom: 1rem;
-        position: relative;
-    }
+        #ctfChallenge p {
+            font-size: 1rem;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+        }
 
-    #flag-input::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-    }
+        #ctfChallenge input {
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
+        }
 
-    @keyframes jump {
-        0% { transform: translate(0, 0); }
-        25% { transform: translate(10px, -10px); }
-        50% { transform: translate(-10px, 10px); }
-        75% { transform: translate(10px, -10px); }
-        100% { transform: translate(0, 0); }
-    }
+        #ctfChallenge button {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
 
+        #ctfChallenge button:hover {
+            transform: scale(1.05);
+        }
+
+        #ctfChallenge button:disabled {
+            background: var(--glass-bg);
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
-    
     <header>
         <nav>
             <div class="logo">CMRCET E-SUMMIT</div>
@@ -455,7 +457,7 @@
             </div>
         </div>
     </section>
-    
+
     <section id="schedule">
         <h2 class="section-title">Event Schedule</h2>
         <div class="schedule-day">
@@ -620,248 +622,184 @@
         </div>
     </section>
 
-
-    <section id="ctf-challenge">
-        <h2>CTF Challenge</h2>
-        <p>Decrypt the hidden flag and submit it to win a prize!</p>
-        <input type="text" id="flag-input" placeholder="Enter the decrypted flag here">
-        <button onclick="submitCTFFlag()">Submit</button>
-    </section>
-    
     <section id="credits">
         <p>Developed with ❤️ from Tech Team at I&E Club CMRCET</p>
-        <p>P.KRISHNA KOUSHIK</p>
-        <p>Hint: Look for hidden variables in the code. Decode to win a VIP Pass</p>
-        <button id="surpriseButton">TAP FOR A SURPRISE</button>
+        <p>Lead Developer: 23h51A66H2 [P. KRISHNA KOUSHIK CSM-2027]</p>
+        <button id="surpriseButton">TAP FOR SURPRISE</button>
     </section>
-    
-    
+
+    <section id="ctfChallenge">
+        <p>Solve the CTF challenge to get a VIP pass for free!</p>
+        <input type="text" id="ctfInput" placeholder="Enter the flag here">
+        <button id="ctfButton" onclick="checkCTFFlag()">Submit</button>
+    </section>
 
     <script>
-        function submitCTFFlag() {
-        const encodedFlag = getComputedStyle(document.documentElement).getPropertyValue('--ctf-flag').trim();
-        const decodedFlag = atob(encodedFlag); // Decodes to "FREE_PASS_FOOD_GUESTS"
-        const userInput = document.getElementById('flag-input').value;
-        if (userInput === decodedFlag) {
-            window.location.href = atob("aHR0cHM6Ly90Lmx5L2k0eWtCP3I9cXI="); // Base64 for "https://t.ly/i4ykB?r=qr"
-        } else {
-            alert("Incorrect flag. Try again!");
-        }
-    }
-
-    // Function to make the input box jump
-    function makeInputJump() {
-        const inputBox = document.getElementById('flag-input');
-        inputBox.style.animation = 'jump 0.5s ease';
-        setTimeout(() => {
-            inputBox.style.animation = '';
-        }, 500);
-    }
-
-    // Add event listeners for mouse clicks
-    const inputBox = document.getElementById('flag-input');
-    inputBox.addEventListener('mousedown', (event) => {
-        if (event.button === 0) { // Left mouse click
-            makeInputJump();
-        } else if (event.button === 2) { // Right mouse click
-            event.preventDefault(); // Prevent context menu
-            inputBox.focus(); // Allow text input
-        }
-    });
-
-    // Prevent context menu on right-click
-    inputBox.addEventListener('contextmenu', (event) => {
-        event.preventDefault();
-    });
         // Three.js Animation with Automatic Rotation
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({
-    canvas: document.querySelector('#three-canvas'),
-    alpha: true,
-    antialias: true
-});
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector('#three-canvas'),
+            alpha: true,
+            antialias: true
+        });
 
-
-
-function updateRendererSize() {
-    renderer.setSize(window.innerWidth, window.innerHeight, false);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-}
-
-updateRendererSize();
-
-// Particles for background animation
-const particlesGeometry = new THREE.BufferGeometry();
-const particlesCount = 5000;
-const posArray = new Float32Array(particlesCount * 3);
-
-for (let i = 0; i < particlesCount * 3; i += 3) {
-    posArray[i] = (Math.random() - 0.5) * 20;
-    posArray[i + 1] = (Math.random() - 0.5) * 20;
-    posArray[i + 2] = (Math.random() - 0.5) * 20;
-}
-
-particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-const particlesMaterial = new THREE.PointsMaterial({
-    size: 0.03,
-    color: '#00f2ff',
-    transparent: true,
-    opacity: 0.8,
-    blending: THREE.AdditiveBlending,
-    sizeAttenuation: true
-});
-const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-scene.add(particlesMesh);
-camera.position.z = 8;
-
-// Firecrackers for surprise effect
-const firecrackerGeometry = new THREE.BufferGeometry();
-const firecrackerCount = 7000;
-const firecrackerPositions = new Float32Array(firecrackerCount * 3);
-const firecrackerVelocities = new Float32Array(firecrackerCount * 3);
-
-for (let i = 0; i < firecrackerCount * 3; i += 3) {
-    // Slightly random initial positions around the center
-    firecrackerPositions[i] = (Math.random() - 0.5) * 0.1;
-    firecrackerPositions[i + 1] = (Math.random() - 0.5) * 0.1;
-    firecrackerPositions[i + 2] = (Math.random() - 0.5) * 0.1;
-
-    // Reduced velocities for slower movement
-    firecrackerVelocities[i] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
-    firecrackerVelocities[i + 1] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
-    firecrackerVelocities[i + 2] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
-}
-
-firecrackerGeometry.setAttribute('position', new THREE.BufferAttribute(firecrackerPositions, 3));
-const firecrackerMaterial = new THREE.PointsMaterial({
-    size: 0.1,
-    color: 0xffd700,
-    transparent: true,
-    opacity: 1,
-    blending: THREE.AdditiveBlending,
-    depthTest: true,
-    sizeAttenuation: true
-});
-const firecrackerParticles = new THREE.Points(firecrackerGeometry, firecrackerMaterial);
-firecrackerParticles.visible = false; // Initially hidden
-scene.add(firecrackerParticles);
-
-// Ensure the camera is looking at the origin
-camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-// Adjust camera near and far planes if necessary
-camera.near = 0.1;
-camera.far = 1000;
-camera.updateProjectionMatrix();
-
-function animate() {
-    requestAnimationFrame(animate);
-    particlesMesh.rotation.y += 0.001;
-    particlesMesh.rotation.x += 0.001;
-    firecrackerParticles.rotation.y += 0.001; // Optional: add rotation to firecrackers
-    renderer.render(scene, camera);
-}
-
-animate();
-
-function updateTimer() {
-    const eventDate = new Date('February 21, 2025 9:10:00').getTime();
-    const now = new Date().getTime();
-    const distance = eventDate - now;
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-}
-
-setInterval(updateTimer, 1000);
-updateTimer();
-
-window.addEventListener('resize', () => {
-    updateRendererSize();
-});
-        
-function _0x1a2b() {
-        const encodedFlag = getComputedStyle(document.documentElement).getPropertyValue('--ctf-flag').trim();
-        const decodedFlag = atob(encodedFlag);
-        const userInput = document.getElementById('flag-input').value;
-        if (userInput === decodedFlag) {
-            window.location.href = atob("aHR0cHM6Ly90Lmx5L2k0eWtCP3I9cXI=");
-        } else {
-            alert("Incorrect flag. Try again!");
+        function updateRendererSize() {
+            renderer.setSize(window.innerWidth, window.innerHeight, false);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
         }
-    }
 
-    function makeInputJump() {
-        const inputBox = document.getElementById('flag-input');
-        inputBox.style.animation = 'jump 0.5s ease';
-        setTimeout(() => {
-            inputBox.style.animation = '';
-        }, 500);
-    }
+        updateRendererSize();
 
-    const inputBox = document.getElementById('flag-input');
-    inputBox.addEventListener('mousedown', (event) => {
-        if (event.button === 0) {
-            makeInputJump();
-        } else if (event.button === 2) {
-            event.preventDefault();
-            inputBox.focus();
+        // Particles for background animation
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 5000;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for (let i = 0; i < particlesCount * 3; i += 3) {
+            posArray[i] = (Math.random() - 0.5) * 20;
+            posArray[i + 1] = (Math.random() - 0.5) * 20;
+            posArray[i + 2] = (Math.random() - 0.5) * 20;
         }
-    });
 
-    inputBox.addEventListener('contextmenu', (event) => {
-        event.preventDefault();
-    });
-// Firecracker Animation
-// Firecracker sound
-const firecrackerSound = new Audio('https://github.com/krishnakoushik9/E-SUMMIT/blob/main/fireworks.mp3?raw=true');
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.03,
+            color: '#00f2ff',
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending,
+            sizeAttenuation: true
+        });
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        camera.position.z = 8;
 
-function resetFirecrackers() {
-    const positions = firecrackerParticles.geometry.attributes.position.array;
-    const velocities = firecrackerVelocities;
-    for (let i = 0; i < positions.length; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 0.1;
-        positions[i + 1] = (Math.random() - 0.5) * 0.1;
-        positions[i + 2] = (Math.random() - 0.5) * 0.1;
-        velocities[i] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
-        velocities[i + 1] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
-        velocities[i + 2] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
-    }
-    firecrackerParticles.geometry.attributes.position.needsUpdate = true;
-    firecrackerMaterial.opacity = 1;
-    firecrackerParticles.visible = true; // Show firecrackers
-}
+        // Firecrackers for surprise effect
+        const firecrackerGeometry = new THREE.BufferGeometry();
+        const firecrackerCount = 7000;
+        const firecrackerPositions = new Float32Array(firecrackerCount * 3);
+        const firecrackerVelocities = new Float32Array(firecrackerCount * 3);
 
-function animateFirecrackers() {
-    requestAnimationFrame(animateFirecrackers);
-    const positions = firecrackerParticles.geometry.attributes.position.array;
-    for (let i = 0; i < positions.length; i += 3) {
-        positions[i] += firecrackerVelocities[i];
-        positions[i + 1] += firecrackerVelocities[i + 1];
-        positions[i + 2] += firecrackerVelocities[i + 2];
-    }
-    firecrackerParticles.geometry.attributes.position.needsUpdate = true;
-    firecrackerMaterial.opacity -= 0.001; // Reduced from 0.005 to 0.001 for slower fade-out
-    if (firecrackerMaterial.opacity <= 0) {
-        firecrackerParticles.visible = false; // Hide firecrackers after animation
-    }
-}
+        for (let i = 0; i < firecrackerCount * 3; i += 3) {
+            // Slightly random initial positions around the center
+            firecrackerPositions[i] = (Math.random() - 0.5) * 0.1;
+            firecrackerPositions[i + 1] = (Math.random() - 0.5) * 0.1;
+            firecrackerPositions[i + 2] = (Math.random() - 0.5) * 0.1;
 
-document.getElementById('surpriseButton').addEventListener('click', () => {
-    resetFirecrackers();
-    firecrackerSound.play();
-    animateFirecrackers();
-});
+            // Reduced velocities for slower movement
+            firecrackerVelocities[i] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
+            firecrackerVelocities[i + 1] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
+            firecrackerVelocities[i + 2] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
+        }
 
-    
+        firecrackerGeometry.setAttribute('position', new THREE.BufferAttribute(firecrackerPositions, 3));
+        const firecrackerMaterial = new THREE.PointsMaterial({
+            size: 0.1,
+            color: 0xffd700,
+            transparent: true,
+            opacity: 1,
+            blending: THREE.AdditiveBlending,
+            depthTest: true,
+            sizeAttenuation: true
+        });
+        const firecrackerParticles = new THREE.Points(firecrackerGeometry, firecrackerMaterial);
+        firecrackerParticles.visible = false; // Initially hidden
+        scene.add(firecrackerParticles);
+
+        // Ensure the camera is looking at the origin
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+        // Adjust camera near and far planes if necessary
+        camera.near = 0.1;
+        camera.far = 1000;
+        camera.updateProjectionMatrix();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            particlesMesh.rotation.y += 0.001;
+            particlesMesh.rotation.x += 0.001;
+            firecrackerParticles.rotation.y += 0.001; // Optional: add rotation to firecrackers
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        function updateTimer() {
+            const eventDate = new Date('February 21, 2025 9:10:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        window.addEventListener('resize', () => {
+            updateRendererSize();
+        });
+
+        // Firecracker Animation
+        // Firecracker sound
+        const firecrackerSound = new Audio('https://github.com/krishnakoushik9/E-SUMMIT/blob/main/fireworks.mp3?raw=true');
+
+        function resetFirecrackers() {
+            const positions = firecrackerParticles.geometry.attributes.position.array;
+            const velocities = firecrackerVelocities;
+            for (let i = 0; i < positions.length; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 0.1;
+                positions[i + 1] = (Math.random() - 0.5) * 0.1;
+                positions[i + 2] = (Math.random() - 0.5) * 0.1;
+                velocities[i] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
+                velocities[i + 1] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
+                velocities[i + 2] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
+            }
+            firecrackerParticles.geometry.attributes.position.needsUpdate = true;
+            firecrackerMaterial.opacity = 1;
+            firecrackerParticles.visible = true; // Show firecrackers
+        }
+
+        function animateFirecrackers() {
+            requestAnimationFrame(animateFirecrackers);
+            const positions = firecrackerParticles.geometry.attributes.position.array;
+            for (let i = 0; i < positions.length; i += 3) {
+                positions[i] += firecrackerVelocities[i];
+                positions[i + 1] += firecrackerVelocities[i + 1];
+                positions[i + 2] += firecrackerVelocities[i + 2];
+            }
+            firecrackerParticles.geometry.attributes.position.needsUpdate = true;
+            firecrackerMaterial.opacity -= 0.001; // Reduced from 0.005 to 0.001 for slower fade-out
+            if (firecrackerMaterial.opacity <= 0) {
+                firecrackerParticles.visible = false; // Hide firecrackers after animation
+            }
+        }
+
+        document.getElementById('surpriseButton').addEventListener('click', () => {
+            resetFirecrackers();
+            firecrackerSound.play();
+            animateFirecrackers();
+        });
+
+        // CTF Challenge
+        function checkCTFFlag() {
+            const ctfInput = document.getElementById('ctfInput').value;
+            const ctfButton = document.getElementById('ctfButton');
+            if (ctfInput === "CMRCET_CTF_2025") {
+                alert("Congratulations! You've won a VIP pass!");
+                window.location.href = "https://t.ly/i4ykB";
+            } else {
+                alert("Incorrect flag. Try again!");
+            }
+        }
     </script>
 </body>
 </html>
