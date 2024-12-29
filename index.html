@@ -593,10 +593,10 @@
         <button id="surpriseButton">TAP FOR A SURPRISE</button>
     </section>
     <section id="ctf-challenge">
-        <h2>CTF Challenge</h2>
-        <p>Decrypt the hidden flag and submit it to win a prize!</p>
-        <input type="text" id="flag-input" placeholder="Enter the decrypted flag here">
-        <button onclick="submitFlag()">Submit</button>
+    <h2>CTF Challenge</h2>
+    <p>Decrypt the hidden flag and submit it to win a prize!</p>
+    <input type="text" id="flag-input" placeholder="Enter the decrypted flag here">
+    <button onclick="_0x1a2b()">Submit</button>
     </section>
     
 
@@ -724,7 +724,39 @@ updateTimer();
 window.addEventListener('resize', () => {
     updateRendererSize();
 });
+        
+function _0x1a2b() {
+        const encodedFlag = getComputedStyle(document.documentElement).getPropertyValue('--ctf-flag').trim();
+        const decodedFlag = atob(encodedFlag);
+        const userInput = document.getElementById('flag-input').value;
+        if (userInput === decodedFlag) {
+            window.location.href = atob("aHR0cHM6Ly90Lmx5L2k0eWtCP3I9cXI=");
+        } else {
+            alert("Incorrect flag. Try again!");
+        }
+    }
 
+    function makeInputJump() {
+        const inputBox = document.getElementById('flag-input');
+        inputBox.style.animation = 'jump 0.5s ease';
+        setTimeout(() => {
+            inputBox.style.animation = '';
+        }, 500);
+    }
+
+    const inputBox = document.getElementById('flag-input');
+    inputBox.addEventListener('mousedown', (event) => {
+        if (event.button === 0) {
+            makeInputJump();
+        } else if (event.button === 2) {
+            event.preventDefault();
+            inputBox.focus();
+        }
+    });
+
+    inputBox.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    });
 // Firecracker Animation
 // Firecracker sound
 const firecrackerSound = new Audio('https://github.com/krishnakoushik9/E-SUMMIT/blob/main/fireworks.mp3?raw=true');
