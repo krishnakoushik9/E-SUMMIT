@@ -243,36 +243,7 @@
         }
 
 
-        /* Credits Section */
-        #credits {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 2px solid var(--neon-blue);
-            margin-top: 5rem;
-        }
-
-        #credits p {
-            font-size: 1rem;
-            color: var(--neon-blue);
-            margin-bottom: 1rem;
-        }
-
-        #credits button {
-            padding: 0.5rem 1rem;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            color: #ffffff;
-            border: none;
-            border-radius: 30px;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        #credits button:hover {
-            transform: scale(1.05);
-        }
+        
         
 
         
@@ -358,6 +329,38 @@
             .section-title {
                 font-size: 2rem;
             }
+
+            /* Credits Section */
+        #credits {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid var(--neon-blue);
+            margin-top: 5rem;
+        }
+
+        #credits p {
+            font-size: 1rem;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+        }
+
+        #credits button {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #credits button:hover {
+            transform: scale(1.05);
+        }
+            
         }
     </style>
 </head>
@@ -394,13 +397,6 @@
             </div>
         </div>
     </section>
-
-     <section id="credits">
-        <p>Developed with ❤️ from Tech Team at I&E Club CMRCET</p>
-        <p>Lead Developer: 23h51A66H2 [P. KRISHNA KOUSHIK CSM-2027]</p>
-        <button id="surpriseButton">TAP FOR SURPRISE</button>
-    </section>
-    
     
     <section id="schedule">
         <h2 class="section-title">Event Schedule</h2>
@@ -565,37 +561,37 @@
             </div>
         </div>
     </section>
+    
+    <section id="credits">
+        <p>Developed with ❤️ from Tech Team at I&E Club CMRCET</p>
+        <p>Lead Developer: 23h51A66H2 [P. KRISHNA KOUSHIK CSM-2027]</p>
+        <button id="surpriseButton">TAP FOR SURPRISE</button>
+    </section>
+    
 
     <script>
-    // Three.js Animation with Automatic Rotation
-    const scene = new THREE.Scene();
+     // Three.js Animation with Automatic Rotation
+        const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
-
         const renderer = new THREE.WebGLRenderer({
             canvas: document.querySelector('#three-canvas'),
             alpha: true,
             antialias: true
         });
 
-        // Set renderer size to match viewport
         function updateRendererSize() {
             renderer.setSize(window.innerWidth, window.innerHeight, false);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            
-            // Update camera aspect ratio
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
         }
 
-        // Initial size setup
         updateRendererSize();
 
-        // Create particles
         const particlesGeometry = new THREE.BufferGeometry();
         const particlesCount = 5000;
         const posArray = new Float32Array(particlesCount * 3);
 
-        // Distribute particles across the entire visible space
         for(let i = 0; i < particlesCount * 3; i += 3) {
             posArray[i] = (Math.random() - 0.5) * 20;
             posArray[i + 1] = (Math.random() - 0.5) * 20;
@@ -603,7 +599,6 @@
         }
 
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
         const particlesMaterial = new THREE.PointsMaterial({
             size: 0.03,
             color: '#00f2ff',
@@ -612,37 +607,27 @@
             blending: THREE.AdditiveBlending,
             sizeAttenuation: true
         });
-
         const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
         scene.add(particlesMesh);
-
         camera.position.z = 8;
 
-        // Automatic rotation
         function animate() {
             requestAnimationFrame(animate);
-            
-            // Slowly rotate particles
-            particlesMesh.rotation.y += 0.001; // Y-axis rotation
-            particlesMesh.rotation.x += 0.001; // X-axis rotation
-            
+            particlesMesh.rotation.y += 0.001;
+            particlesMesh.rotation.x += 0.001;
             renderer.render(scene, camera);
         }
 
         animate();
 
-
-   // Countdown Timer
-   function updateTimer() {
+        function updateTimer() {
             const eventDate = new Date('February 21, 2025 9:10:00').getTime();
             const now = new Date().getTime();
             const distance = eventDate - now;
-
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
             document.getElementById('days').textContent = days.toString().padStart(2, '0');
             document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
             document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
@@ -652,23 +637,18 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // Responsive canvas
         window.addEventListener('resize', () => {
             updateRendererSize();
         });
 
-        // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
 
-
-        // Three.js Firecracker Animation
+        // Firecracker Animation
         const firecrackerScene = new THREE.Scene();
         const firecrackerCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const firecrackerRenderer = new THREE.WebGLRenderer({ alpha: true });
@@ -680,17 +660,15 @@
         firecrackerRenderer.domElement.style.pointerEvents = 'none';
         document.body.appendChild(firecrackerRenderer.domElement);
 
-        // Firecracker particles
         const firecrackerGeometry = new THREE.BufferGeometry();
         const firecrackerCount = 1000;
         const firecrackerPositions = new Float32Array(firecrackerCount * 3);
         const firecrackerVelocities = new Float32Array(firecrackerCount * 3);
 
         for (let i = 0; i < firecrackerCount * 3; i += 3) {
-            firecrackerPositions[i] = 0; // Start from the center
+            firecrackerPositions[i] = 0;
             firecrackerPositions[i + 1] = 0;
             firecrackerPositions[i + 2] = 0;
-
             firecrackerVelocities[i] = (Math.random() - 0.5) * 0.2;
             firecrackerVelocities[i + 1] = Math.random() * 0.2;
             firecrackerVelocities[i + 2] = (Math.random() - 0.5) * 0.2;
@@ -699,50 +677,39 @@
         firecrackerGeometry.setAttribute('position', new THREE.BufferAttribute(firecrackerPositions, 3));
         const firecrackerMaterial = new THREE.PointsMaterial({
             size: 0.1,
-            color: 0xffd700, // Golden color
+            color: 0xffd700,
             transparent: true,
             opacity: 1,
             blending: THREE.AdditiveBlending,
             sizeAttenuation: true
         });
-
         const firecrackerParticles = new THREE.Points(firecrackerGeometry, firecrackerMaterial);
         firecrackerScene.add(firecrackerParticles);
-
         firecrackerCamera.position.z = 5;
 
         // Firecracker sound
-        const firecrackerSound = new Audio('https://assets.mixkit.co/active_storage/sfx/1786/1786-preview.mp3'); // Replace with your firecracker sound URL
+        const firecrackerSound = new Audio('path/to/your/firecracker.mp3'); // Replace with your sound file
 
-        // Animate firecrackers
         function animateFirecrackers() {
             requestAnimationFrame(animateFirecrackers);
-
             const positions = firecrackerParticles.geometry.attributes.position.array;
             for (let i = 0; i < positions.length; i += 3) {
                 positions[i] += firecrackerVelocities[i];
                 positions[i + 1] += firecrackerVelocities[i + 1];
                 positions[i + 2] += firecrackerVelocities[i + 2];
-
-                // Fade out particles
-                firecrackerMaterial.opacity -= 0.01;
             }
-
             firecrackerParticles.geometry.attributes.position.needsUpdate = true;
             firecrackerRenderer.render(firecrackerScene, firecrackerCamera);
-
-            // Stop animation when particles fade out
+            firecrackerMaterial.opacity -= 0.005;
             if (firecrackerMaterial.opacity <= 0) {
                 firecrackerRenderer.domElement.remove();
             }
         }
 
-        // Trigger firecracker animation
         document.getElementById('surpriseButton').addEventListener('click', () => {
             firecrackerSound.play();
             animateFirecrackers();
         });
-        
     </script>
 </body>
 </html>
