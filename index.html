@@ -613,7 +613,7 @@ const particlesGeometry = new THREE.BufferGeometry();
 const particlesCount = 5000;
 const posArray = new Float32Array(particlesCount * 3);
 
-for(let i = 0; i < particlesCount * 3; i += 3) {
+for (let i = 0; i < particlesCount * 3; i += 3) {
     posArray[i] = (Math.random() - 0.5) * 20;
     posArray[i + 1] = (Math.random() - 0.5) * 20;
     posArray[i + 2] = (Math.random() - 0.5) * 20;
@@ -643,11 +643,11 @@ for (let i = 0; i < firecrackerCount * 3; i += 3) {
     firecrackerPositions[i] = (Math.random() - 0.5) * 0.1;
     firecrackerPositions[i + 1] = (Math.random() - 0.5) * 0.1;
     firecrackerPositions[i + 2] = (Math.random() - 0.5) * 0.1;
-    
-    // Random velocities in all directions
-    firecrackerVelocities[i] = (Math.random() - 0.5) * 0.4;
-    firecrackerVelocities[i + 1] = (Math.random() - 0.5) * 0.4;
-    firecrackerVelocities[i + 2] = (Math.random() - 0.5) * 0.4;
+
+    // Reduced velocities for slower movement
+    firecrackerVelocities[i] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
+    firecrackerVelocities[i + 1] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
+    firecrackerVelocities[i + 2] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
 }
 
 firecrackerGeometry.setAttribute('position', new THREE.BufferAttribute(firecrackerPositions, 3));
@@ -714,9 +714,9 @@ function resetFirecrackers() {
         positions[i] = (Math.random() - 0.5) * 0.1;
         positions[i + 1] = (Math.random() - 0.5) * 0.1;
         positions[i + 2] = (Math.random() - 0.5) * 0.1;
-        velocities[i] = (Math.random() - 0.5) * 0.4;
-        velocities[i + 1] = (Math.random() - 0.5) * 0.4;
-        velocities[i + 2] = (Math.random() - 0.5) * 0.4;
+        velocities[i] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
+        velocities[i + 1] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
+        velocities[i + 2] = (Math.random() - 0.5) * 0.2; // Reduced from 0.4 to 0.2
     }
     firecrackerParticles.geometry.attributes.position.needsUpdate = true;
     firecrackerMaterial.opacity = 1;
@@ -732,7 +732,7 @@ function animateFirecrackers() {
         positions[i + 2] += firecrackerVelocities[i + 2];
     }
     firecrackerParticles.geometry.attributes.position.needsUpdate = true;
-    firecrackerMaterial.opacity -= 0.005;
+    firecrackerMaterial.opacity -= 0.001; // Reduced from 0.005 to 0.001 for slower fade-out
     if (firecrackerMaterial.opacity <= 0) {
         firecrackerParticles.visible = false; // Hide firecrackers after animation
     }
