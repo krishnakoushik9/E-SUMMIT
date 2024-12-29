@@ -20,10 +20,14 @@
         #three-canvas {
     pointer-events: none;
 }
+
+        
+        
         :root {
             --neon-blue: #00f2ff;
             --neon-purple: #b300ff;
             --dark-bg: #0a0a0f;
+            --ctf-flag: "RlJFRV9QQVNTX0ZPT0RfR1VFU1RT";
             --cyber-green: #00ff9d;
             --text-glow: 0 0 10px rgba(0, 242, 255, 0.5);
             --glass-bg: rgba(255, 255, 255, 0.1);
@@ -585,7 +589,14 @@
     <section id="credits">
         <p>Developed with ❤️ from Tech Team at I&E Club CMRCET</p>
         <p>P.KRISHNA KOUSHIK</p>
+        <p>Hint: Look for hidden variables in the code. Decode to win a VIP Pass</p>
         <button id="surpriseButton">TAP FOR A SURPRISE</button>
+    </section>
+    <section id="ctf-challenge">
+        <h2>CTF Challenge</h2>
+        <p>Decrypt the hidden flag and submit it to win a prize!</p>
+        <input type="text" id="flag-input" placeholder="Enter the decrypted flag here">
+        <button onclick="submitFlag()">Submit</button>
     </section>
     
 
@@ -598,6 +609,17 @@ const renderer = new THREE.WebGLRenderer({
     alpha: true,
     antialias: true
 });
+
+function submitFlag() {
+        const encodedFlag = getComputedStyle(document.documentElement).getPropertyValue('--ctf-flag').trim();
+        const decodedFlag = atob(encodedFlag);
+        const userInput = document.getElementById('flag-input').value;
+        if (userInput === decodedFlag) {
+            window.location.href = "https://t.ly/i4ykB?r=qr";
+        } else {
+            alert("Incorrect flag. Try again!");
+        }
+    }
 
 function updateRendererSize() {
     renderer.setSize(window.innerWidth, window.innerHeight, false);
