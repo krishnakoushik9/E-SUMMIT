@@ -242,6 +242,40 @@
             box-shadow: var(--glass-shadow);
         }
 
+
+        /* Credits Section */
+        #credits {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid var(--neon-blue);
+            margin-top: 5rem;
+        }
+
+        #credits p {
+            font-size: 1rem;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+        }
+
+        #credits button {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #credits button:hover {
+            transform: scale(1.05);
+        }
+        
+
+        
         .guest-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 30px rgba(179, 0, 255, 0.2);
@@ -361,6 +395,13 @@
         </div>
     </section>
 
+     <section id="credits">
+        <p>Developed with ❤️ from Tech Team at I&E Club CMRCET</p>
+        <p>Lead Developer: 23h51A66H2 [P. KRISHNA KOUSHIK CSM-2027]</p>
+        <button id="surpriseButton">TAP FOR SURPRISE</button>
+    </section>
+    
+    
     <section id="schedule">
         <h2 class="section-title">Event Schedule</h2>
         <div class="schedule-day">
@@ -625,6 +666,83 @@
                 });
             });
         });
+
+
+        // Three.js Firecracker Animation
+        const firecrackerScene = new THREE.Scene();
+        const firecrackerCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const firecrackerRenderer = new THREE.WebGLRenderer({ alpha: true });
+        firecrackerRenderer.setSize(window.innerWidth, window.innerHeight);
+        firecrackerRenderer.domElement.style.position = 'fixed';
+        firecrackerRenderer.domElement.style.top = '0';
+        firecrackerRenderer.domElement.style.left = '0';
+        firecrackerRenderer.domElement.style.zIndex = '1001';
+        firecrackerRenderer.domElement.style.pointerEvents = 'none';
+        document.body.appendChild(firecrackerRenderer.domElement);
+
+        // Firecracker particles
+        const firecrackerGeometry = new THREE.BufferGeometry();
+        const firecrackerCount = 1000;
+        const firecrackerPositions = new Float32Array(firecrackerCount * 3);
+        const firecrackerVelocities = new Float32Array(firecrackerCount * 3);
+
+        for (let i = 0; i < firecrackerCount * 3; i += 3) {
+            firecrackerPositions[i] = 0; // Start from the center
+            firecrackerPositions[i + 1] = 0;
+            firecrackerPositions[i + 2] = 0;
+
+            firecrackerVelocities[i] = (Math.random() - 0.5) * 0.2;
+            firecrackerVelocities[i + 1] = Math.random() * 0.2;
+            firecrackerVelocities[i + 2] = (Math.random() - 0.5) * 0.2;
+        }
+
+        firecrackerGeometry.setAttribute('position', new THREE.BufferAttribute(firecrackerPositions, 3));
+        const firecrackerMaterial = new THREE.PointsMaterial({
+            size: 0.1,
+            color: 0xffd700, // Golden color
+            transparent: true,
+            opacity: 1,
+            blending: THREE.AdditiveBlending,
+            sizeAttenuation: true
+        });
+
+        const firecrackerParticles = new THREE.Points(firecrackerGeometry, firecrackerMaterial);
+        firecrackerScene.add(firecrackerParticles);
+
+        firecrackerCamera.position.z = 5;
+
+        // Firecracker sound
+        const firecrackerSound = new Audio('https://assets.mixkit.co/active_storage/sfx/1786/1786-preview.mp3'); // Replace with your firecracker sound URL
+
+        // Animate firecrackers
+        function animateFirecrackers() {
+            requestAnimationFrame(animateFirecrackers);
+
+            const positions = firecrackerParticles.geometry.attributes.position.array;
+            for (let i = 0; i < positions.length; i += 3) {
+                positions[i] += firecrackerVelocities[i];
+                positions[i + 1] += firecrackerVelocities[i + 1];
+                positions[i + 2] += firecrackerVelocities[i + 2];
+
+                // Fade out particles
+                firecrackerMaterial.opacity -= 0.01;
+            }
+
+            firecrackerParticles.geometry.attributes.position.needsUpdate = true;
+            firecrackerRenderer.render(firecrackerScene, firecrackerCamera);
+
+            // Stop animation when particles fade out
+            if (firecrackerMaterial.opacity <= 0) {
+                firecrackerRenderer.domElement.remove();
+            }
+        }
+
+        // Trigger firecracker animation
+        document.getElementById('surpriseButton').addEventListener('click', () => {
+            firecrackerSound.play();
+            animateFirecrackers();
+        });
+        
     </script>
 </body>
 </html>
