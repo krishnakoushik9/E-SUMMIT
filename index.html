@@ -591,154 +591,147 @@
 
     <script>
      // Three.js Animation with Automatic Rotation
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({
-            canvas: document.querySelector('#three-canvas'),
-            alpha: true,
-            antialias: true
-        });
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({
+    canvas: document.querySelector('#three-canvas'),
+    alpha: true,
+    antialias: true
+});
 
-        function updateRendererSize() {
-            renderer.setSize(window.innerWidth, window.innerHeight, false);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-        }
+function updateRendererSize() {
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+}
 
-        updateRendererSize();
+updateRendererSize();
 
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 5000;
-        const posArray = new Float32Array(particlesCount * 3);
+// Particles for background animation
+const particlesGeometry = new THREE.BufferGeometry();
+const particlesCount = 5000;
+const posArray = new Float32Array(particlesCount * 3);
 
-        for(let i = 0; i < particlesCount * 3; i += 3) {
-            posArray[i] = (Math.random() - 0.5) * 20;
-            posArray[i + 1] = (Math.random() - 0.5) * 20;
-            posArray[i + 2] = (Math.random() - 0.5) * 20;
-        }
+for(let i = 0; i < particlesCount * 3; i += 3) {
+    posArray[i] = (Math.random() - 0.5) * 20;
+    posArray[i + 1] = (Math.random() - 0.5) * 20;
+    posArray[i + 2] = (Math.random() - 0.5) * 20;
+}
 
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.03,
-            color: '#00f2ff',
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending,
-            sizeAttenuation: true
-        });
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-        camera.position.z = 8;
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.03,
+    color: '#00f2ff',
+    transparent: true,
+    opacity: 0.8,
+    blending: THREE.AdditiveBlending,
+    sizeAttenuation: true
+});
+const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particlesMesh);
+camera.position.z = 8;
 
-        function animate() {
-            requestAnimationFrame(animate);
-            particlesMesh.rotation.y += 0.001;
-            particlesMesh.rotation.x += 0.001;
-            renderer.render(scene, camera);
-        }
+// Firecrackers for surprise effect
+const firecrackerGeometry = new THREE.BufferGeometry();
+const firecrackerCount = 1000;
+const firecrackerPositions = new Float32Array(firecrackerCount * 3);
+const firecrackerVelocities = new Float32Array(firecrackerCount * 3);
 
-        animate();
+for (let i = 0; i < firecrackerCount * 3; i += 3) {
+    firecrackerPositions[i] = 0;
+    firecrackerPositions[i + 1] = 0;
+    firecrackerPositions[i + 2] = 0;
+    firecrackerVelocities[i] = (Math.random() - 0.5) * 0.2;
+    firecrackerVelocities[i + 1] = Math.random() * 0.2;
+    firecrackerVelocities[i + 2] = (Math.random() - 0.5) * 0.2;
+}
 
-        function updateTimer() {
-            const eventDate = new Date('February 21, 2025 9:10:00').getTime();
-            const now = new Date().getTime();
-            const distance = eventDate - now;
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
+firecrackerGeometry.setAttribute('position', new THREE.BufferAttribute(firecrackerPositions, 3));
+const firecrackerMaterial = new THREE.PointsMaterial({
+    size: 0.1,
+    color: 0xffd700,
+    transparent: true,
+    opacity: 1,
+    blending: THREE.AdditiveBlending,
+    sizeAttenuation: true,
+    depthTest: false // Prevent depth issues
+});
+const firecrackerParticles = new THREE.Points(firecrackerGeometry, firecrackerMaterial);
+firecrackerParticles.visible = false; // Initially hidden
+scene.add(firecrackerParticles);
 
-        setInterval(updateTimer, 1000);
-        updateTimer();
+function animate() {
+    requestAnimationFrame(animate);
+    particlesMesh.rotation.y += 0.001;
+    particlesMesh.rotation.x += 0.001;
+    firecrackerParticles.rotation.y += 0.001; // Optional: add rotation to firecrackers
+    renderer.render(scene, camera);
+}
 
-        window.addEventListener('resize', () => {
-            updateRendererSize();
-        });
+animate();
 
-        // Firecracker Animation
-        const firecrackerScene = new THREE.Scene();
-        const firecrackerCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const firecrackerRenderer = new THREE.WebGLRenderer({ alpha: true });
-        firecrackerRenderer.setSize(window.innerWidth, window.innerHeight);
-        firecrackerRenderer.domElement.style.position = 'fixed';
-        firecrackerRenderer.domElement.style.top = '0';
-        firecrackerRenderer.domElement.style.left = '0';
-        firecrackerRenderer.domElement.style.zIndex = '1001';
-        firecrackerRenderer.domElement.style.pointerEvents = 'none';
-        document.body.appendChild(firecrackerRenderer.domElement);
+function updateTimer() {
+    const eventDate = new Date('February 21, 2025 9:10:00').getTime();
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+}
 
-        const firecrackerGeometry = new THREE.BufferGeometry();
-        const firecrackerCount = 1000;
-        const firecrackerPositions = new Float32Array(firecrackerCount * 3);
-        const firecrackerVelocities = new Float32Array(firecrackerCount * 3);
+setInterval(updateTimer, 1000);
+updateTimer();
 
-        for (let i = 0; i < firecrackerCount * 3; i += 3) {
-            firecrackerPositions[i] = 0;
-            firecrackerPositions[i + 1] = 0;
-            firecrackerPositions[i + 2] = 0;
-            firecrackerVelocities[i] = (Math.random() - 0.5) * 0.2;
-            firecrackerVelocities[i + 1] = Math.random() * 0.2;
-            firecrackerVelocities[i + 2] = (Math.random() - 0.5) * 0.2;
-        }
+window.addEventListener('resize', () => {
+    updateRendererSize();
+});
 
-        firecrackerGeometry.setAttribute('position', new THREE.BufferAttribute(firecrackerPositions, 3));
-        const firecrackerMaterial = new THREE.PointsMaterial({
-            size: 0.1,
-            color: 0xffd700,
-            transparent: true,
-            opacity: 1,
-            blending: THREE.AdditiveBlending,
-            sizeAttenuation: true
-        });
-        const firecrackerParticles = new THREE.Points(firecrackerGeometry, firecrackerMaterial);
-        firecrackerScene.add(firecrackerParticles);
-        firecrackerCamera.position.z = 5;
+// Firecracker Animation
+// Firecracker sound
+const firecrackerSound = new Audio('https://github.com/krishnakoushik9/E-SUMMIT/blob/main/fireworks.mp3?raw=true');
 
-        // Firecracker sound
-        const firecrackerSound = new Audio('https://github.com/krishnakoushik9/E-SUMMIT/blob/main/fireworks.mp3?raw=true');
+function resetFirecrackers() {
+    const positions = firecrackerParticles.geometry.attributes.position.array;
+    const velocities = firecrackerVelocities;
+    for (let i = 0; i < positions.length; i += 3) {
+        positions[i] = 0;
+        positions[i + 1] = 0; // Start from the center
+        positions[i + 2] = 0;
+        velocities[i] = (Math.random() - 0.5) * 0.2;
+        velocities[i + 1] = Math.random() * 0.2;
+        velocities[i + 2] = (Math.random() - 0.5) * 0.2;
+    }
+    firecrackerParticles.geometry.attributes.position.needsUpdate = true;
+    firecrackerMaterial.opacity = 1;
+    firecrackerParticles.visible = true; // Show firecrackers
+}
 
-        function resetFirecrackers() {
-            const positions = firecrackerParticles.geometry.attributes.position.array;
-            const velocities = firecrackerVelocities;
-            for (let i = 0; i < positions.length; i += 3) {
-                positions[i] = 0;
-                positions[i + 1] = -10; // Start from the bottom of the screen
-                positions[i + 2] = 0;
-                velocities[i] = (Math.random() - 0.5) * 0.2;
-                velocities[i + 1] = Math.random() * 0.2;
-                velocities[i + 2] = (Math.random() - 0.5) * 0.2;
-            }
-            firecrackerParticles.geometry.attributes.position.needsUpdate = true;
-            firecrackerMaterial.opacity = 1;
-        }
+function animateFirecrackers() {
+    requestAnimationFrame(animateFirecrackers);
+    const positions = firecrackerParticles.geometry.attributes.position.array;
+    for (let i = 0; i < positions.length; i += 3) {
+        positions[i] += firecrackerVelocities[i];
+        positions[i + 1] += firecrackerVelocities[i + 1];
+        positions[i + 2] += firecrackerVelocities[i + 2];
+    }
+    firecrackerParticles.geometry.attributes.position.needsUpdate = true;
+    firecrackerMaterial.opacity -= 0.005;
+    if (firecrackerMaterial.opacity <= 0) {
+        firecrackerParticles.visible = false; // Hide firecrackers after animation
+    }
+}
 
-        function animateFirecrackers() {
-            requestAnimationFrame(animateFirecrackers);
-            const positions = firecrackerParticles.geometry.attributes.position.array;
-            for (let i = 0; i < positions.length; i += 3) {
-                positions[i] += firecrackerVelocities[i];
-                positions[i + 1] += firecrackerVelocities[i + 1];
-                positions[i + 2] += firecrackerVelocities[i + 2];
-            }
-            firecrackerParticles.geometry.attributes.position.needsUpdate = true;
-            firecrackerRenderer.render(firecrackerScene, firecrackerCamera);
-            firecrackerMaterial.opacity -= 0.005;
-            if (firecrackerMaterial.opacity <= 0) {
-                firecrackerRenderer.domElement.remove();
-            }
-        }
-
-        document.getElementById('surpriseButton').addEventListener('click', () => {
-            resetFirecrackers();
-            firecrackerSound.play();
-            animateFirecrackers();
-        });
+document.getElementById('surpriseButton').addEventListener('click', () => {
+    resetFirecrackers();
+    firecrackerSound.play();
+    animateFirecrackers();
+});
     </script>
 </body>
 </html>
