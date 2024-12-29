@@ -76,6 +76,8 @@
             text-shadow: var(--text-glow);
         }
 
+        
+
         /* Hero Section */
         #hero {
             height: 100vh;
@@ -330,6 +332,25 @@
                 font-size: 2rem;
             }
 
+             #surpriseButton {
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+        }
+
+        #surpriseButton:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.8);
+        }
+
             /* Credits Section */
         #credits {
             text-align: center;
@@ -359,7 +380,7 @@
 
         #credits button:hover {
             transform: scale(1.05);
-        }
+           }
             
         }
     </style>
@@ -641,13 +662,6 @@
             updateRendererSize();
         });
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
         // Firecracker Animation
         const firecrackerScene = new THREE.Scene();
         const firecrackerCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -688,7 +702,7 @@
         firecrackerCamera.position.z = 5;
 
         // Firecracker sound
-        const firecrackerSound = new Audio('path/to/your/firecracker.mp3'); // Replace with your sound file
+        const firecrackerSound = new Audio('https://github.com/krishnakoushik9/E-SUMMIT/blob/main/fireworks.mp3?raw=true');
 
         function animateFirecrackers() {
             requestAnimationFrame(animateFirecrackers);
