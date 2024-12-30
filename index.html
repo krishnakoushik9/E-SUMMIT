@@ -630,7 +630,7 @@
 
     <section id="ctfChallenge">
     <p>Solve the CTF challenge to get a VIP pass for free!</p>
-    <p><strong>Stage 1:</strong> Decrypt this hint using ROT13: <code id="rot13Hint">FRPERG_UBER_2025</code></p>
+    <p><strong>Stage 1:</strong> Decrypt this: <code id="rot13Hint">FRPERG_UBER_2025</code></p>
     <input type="text" id="ctfInput" placeholder="Enter the decrypted hint here">
     <button id="ctfButton" onclick="checkCTFFlag()">Submit</button>
 </section>
@@ -797,7 +797,7 @@ function rot13(str) {
        
         function checkCTFFlag() {
     const ctfInput = document.getElementById('ctfInput').value;
-    const decryptedHint = rot13("FRPERG_UBER_2025"); // Decrypts to "SECRET_HOVER_2025"
+    const decryptedHint = rot13("FRPERG_UBER_2025"); // 
     const secondKey = "LEGION_CMRCET_#456--3$";
 
     if (ctfInput === decryptedHint) {
