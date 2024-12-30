@@ -637,11 +637,12 @@
 
     <script>
 
+    // ROT13 Decryption Function
     function rot13(str) {
-    return str.replace(/[a-zA-Z]/g, function (c) {
-    return String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
-    });
-}
+        return str.replace(/[a-zA-Z]/g, function (c) {
+            return String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
+        });
+    }
         // Three.js Animation with Automatic Rotation
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -798,24 +799,25 @@
         
 
        
+    // CTF Challenge Logic
     function checkCTFFlag() {
-    const ctfInput = document.getElementById('ctfInput').value;
-    const decryptedHint = rot13("FRPERG_UBER_2025"); // Decrypts to "SECRET_HOVER_2025"
-    const secondKey = "LEGION_CMRCET_#456--3$";
+        const ctfInput = document.getElementById('ctfInput').value;
+        const decryptedHint = rot13("FRPERG_UBER_2025"); // Decrypts to "SECRET_HOVER_2025"
+        const secondKey = "LEGION_CMRCET_#456--3$";
 
-    if (ctfInput === decryptedHint) {
-        alert("Stage 1 Complete! Here's your hint for Stage 2: The second key is 'LEGION_CMRCET_#456--3$'.");
-        const finalAnswer = prompt("Enter the second key:");
-        if (finalAnswer === secondKey) {
-            alert("Congratulations! You've won a VIP pass!");
-            window.location.href = "https://t.ly/i4ykB";
+        if (ctfInput === decryptedHint) {
+            alert("Stage 1 Complete! Here's your hint for Stage 2: The second key is 'LEGION_CMRCET_#456--3$'.");
+            const finalAnswer = prompt("Enter the second key:");
+            if (finalAnswer === secondKey) {
+                alert("Congratulations! You've won a VIP pass!");
+                window.location.href = "https://t.ly/i4ykB";
+            } else {
+                alert("Incorrect second key. Try again!");
+            }
         } else {
-            alert("Incorrect second key. Try again!");
+            alert("Incorrect flag. Try again!");
         }
-    } else {
-        alert("Incorrect flag. Try again!");
     }
-}
     </script>
 </body>
 </html>
