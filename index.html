@@ -629,10 +629,11 @@
     </section>
 
     <section id="ctfChallenge">
-        <p>Solve the CTF challenge to get a VIP pass for free!</p>
-        <input type="text" id="ctfInput" placeholder="Enter the flag here">
-        <button id="ctfButton" onclick="checkCTFFlag()">Submit</button>
-    </section>
+    <p>Solve the CTF challenge to get a VIP pass for free!</p>
+    <p><strong>Stage 1:</strong> Decrypt this hint using ROT13: <code id="rot13Hint">FRPERG_UBER_2025</code></p>
+    <input type="text" id="ctfInput" placeholder="Enter the decrypted hint here">
+    <button id="ctfButton" onclick="checkCTFFlag()">Submit</button>
+</section>
 
     <script>
         // Three.js Animation with Automatic Rotation
@@ -788,18 +789,30 @@
             firecrackerSound.play();
             animateFirecrackers();
         });
-
-        // CTF Challenge
+function rot13(str) {
+    return str.replace(/[a-zA-Z]/g, function (c) {
+        return String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
+    });
+}
+       
         function checkCTFFlag() {
-            const ctfInput = document.getElementById('ctfInput').value;
-            const ctfButton = document.getElementById('ctfButton');
-            if (ctfInput === "CMRCET_CTF_2025") {
-                alert("Congratulations! You've won a VIP pass!");
-                window.location.href = "https://t.ly/i4ykB";
-            } else {
-                alert("Incorrect flag. Try again!");
-            }
+    const ctfInput = document.getElementById('ctfInput').value;
+    const decryptedHint = rot13("FRPERG_UBER_2025"); // Decrypts to "SECRET_HOVER_2025"
+    const secondKey = "LEGION_CMRCET_#456--3$";
+
+    if (ctfInput === decryptedHint) {
+        alert("Stage 1 Complete! Here's your hint for Stage 2: The second key is encrypted using a Caesar cipher.");
+        const finalAnswer = prompt("Enter the second key (use the hint to decrypt it):");
+        if (finalAnswer === secondKey) {
+            alert("Congratulations! You've won a VIP pass!");
+            window.location.href = "https://t.ly/i4ykB";
+        } else {
+            alert("Incorrect second key. Try again!");
         }
+    } else {
+        alert("Incorrect flag. Try again!");
+    }
+}
     </script>
 </body>
 </html>
