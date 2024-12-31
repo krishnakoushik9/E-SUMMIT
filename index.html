@@ -514,32 +514,32 @@
         </div>
     </section>
 
-    <section id="tickets">
-        <h2 class="section-title">Get Your Tickets</h2>
-        <div class="ticket-grid">
-            <div class="ticket-card">
-                <h3>Day 1 Pass</h3>
-                <div class="price">₹149</div>
-                <p>Access to all Day 1 events</p>
-                <p>passes available</p>
-                <button class="cta-button" onclick="window.location.href='buy_tickets.html'">Buy Now</button>
-            </div>
-            <div class="ticket-card">
-                <h3>Full Event Pass</h3>
-                <div class="price">₹250</div>
-                <p>Access to both Day 1 & 2 events</p>
-                <p>passes available</p>
-                <button class="cta-button" onclick="window.location.href='buy_tickets.html'">Buy Now</button>
-            </div>
-            <div class="ticket-card">
-                <h3>Day 2 Pass</h3>
-                <div class="price">₹149</div>
-                <p>Access to all Day 2 events</p>
-                <p>passes available</p>
-                <button class="cta-button" onclick="window.location.href='buy_tickets.html'">Buy Now</button>
-            </div>
+   <section id="tickets">
+    <h2 class="section-title">Get Your Tickets</h2>
+    <div class="ticket-grid">
+        <div class="ticket-card">
+            <h3>Day 1 Pass</h3>
+            <div class="price" id="day1Price">₹149</div> <!-- Added id="day1Price" -->
+            <p>Access to all Day 1 events</p>
+            <p>passes available</p>
+            <button class="cta-button" onclick="window.location.href='buy_tickets.html'">Buy Now</button>
         </div>
-    </section>
+        <div class="ticket-card">
+            <h3>Full Event Pass</h3>
+            <div class="price" id="fullEventPrice">₹250</div> <!-- Added id="fullEventPrice" -->
+            <p>Access to both Day 1 & 2 events</p>
+            <p>passes available</p>
+            <button class="cta-button" onclick="window.location.href='buy_tickets.html'">Buy Now</button>
+        </div>
+        <div class="ticket-card">
+            <h3>Day 2 Pass</h3>
+            <div class="price" id="day2Price">₹149</div> <!-- Added id="day2Price" -->
+            <p>Access to all Day 2 events</p>
+            <p>passes available</p>
+            <button class="cta-button" onclick="window.location.href='buy_tickets.html'">Buy Now</button>
+        </div>
+    </div>
+</section>
 
     <section id="stalls">
         <h2 class="section-title">Stall Rentals</h2>
@@ -651,6 +651,26 @@
 
     
     <script>
+    function applyDynamicPricing() {
+    const userAgent = navigator.userAgent;
+    const isiPhone = /iPhone/i.test(userAgent);
+    const isiPad = /iPad/i.test(userAgent);
+    const isiPod = /iPod/i.test(userAgent);
+    const isiOS = isiPhone || isiPad || isiPod; // Check for all iOS devices
+    const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent) && !/CriOS/i.test(userAgent); // Exclude Chrome on iOS
+    const isFirefox = /Firefox/i.test(userAgent) && !/Seamonkey/i.test(userAgent); // Exclude SeaMonkey
+
+    console.log(`iOS: ${isiOS}, Safari: ${isSafari}, Firefox: ${isFirefox}`);
+
+    if (isiOS || isSafari || isFirefox) {
+        document.getElementById('day1Price').textContent = '₹164';
+        document.getElementById('day2Price').textContent = '₹164';
+        document.getElementById('fullEventPrice').textContent = '₹300';
+    }
+}
+
+// Call the function on page load
+window.addEventListener('load', applyDynamicPricing);
 
     // ROT13 Decryption Function
     function rot13(str) {
