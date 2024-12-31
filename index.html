@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CMRCET E-Summit 2025</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
         /* Reset and Base Styles */
         * {
             margin: 0;
@@ -221,53 +224,6 @@
             font-family: 'Orbitron', sans-serif;
         }
 
-        /* Stalls */
-        .stall-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .stall-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: var(--glass-shadow);
-        }
-
-        .stall-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
-        }
-
-        /* Competitions */
-        .competition-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .competition-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: var(--glass-shadow);
-        }
-
-        .competition-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(0, 255, 157, 0.2);
-        }
-
         /* Guests */
         .guest-grid {
             display: grid;
@@ -317,6 +273,29 @@
         .cta-button:hover {
             transform: scale(1.05);
             box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+        }
+
+        /* Competitions */
+        .competition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .competition-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .competition-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 157, 0.2);
         }
 
         /* Responsive Design */
@@ -377,6 +356,72 @@
                 transform: scale(1.05);
             }
         }
+
+        /* Surprise */
+        #surpriseButton {
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+        }
+
+        #surpriseButton:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.8);
+        }
+
+        /* CTF Challenge */
+        #ctfChallenge {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid var(--neon-blue);
+            margin-top: 5rem;
+        }
+
+        #ctfChallenge p {
+            font-size: 1rem;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+        }
+
+        #ctfChallenge input {
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        #ctfChallenge button {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #ctfChallenge button:hover {
+            transform: scale(1.05);
+        }
+
+        #ctfChallenge button:disabled {
+            background: var(--glass-bg);
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -418,52 +463,52 @@
         <div class="schedule-day">
             <h3 class="schedule-title">Day 1: IGNITE INNOVATION</h3>
             <div class="schedule-item">
-                <h4>Registrations</h4>
-                <p>9:00 AM - 10:00 AM | Central Auditorium</p>
-            </div>
-            <div class="schedule-item">
                 <h4>Inauguration Ceremony</h4>
-                <p>10:00 AM - 10:45 AM | Central Auditorium</p>
+                <p>10:00 AM - 11:00 AM</p>
             </div>
             <div class="schedule-item">
                 <h4>Keynote Session</h4>
-                <p>10:45 AM - 12:30 PM | Central Auditorium</p>
+                <p>11:00 AM - 12:30 PM</p>
             </div>
             <div class="schedule-item">
-                <h4>Lunch Break</h4>
-                <p>12:30 PM - 1:10 PM | Block-2 Arena</p>
+                <h4>Lunch Break & Startup Expo</h4>
+                <p>12:30 PM - 1:10 PM</p>
             </div>
             <div class="schedule-item">
-                <h4>Competitions: Startup Pitch & Startup Challenge</h4>
-                <p>1:10 PM - 4:10 PM | Seminar Hall & Idea Labs</p>
+                <h4>Competitions</h4>
+                <p>1:10 PM - 4:00 PM</p>
+            </div>
+            <div class="schedule-item">
+                <h4>Prize Distribution</h4>
+                <p>4:00 PM - 5:00 PM</p>
             </div>
         </div>
 
         <div class="schedule-day">
             <h3 class="schedule-title">Day 2: EMPOWER VISIONARIES</h3>
             <div class="schedule-item">
-                <h4>Talk Show</h4>
-                <p>10:00 AM - 11:20 AM | Central Auditorium</p>
+                <h4>Famous Guy's Talk Show</h4>
+                <p>10:30 AM - 11:30 AM</p>
             </div>
             <div class="schedule-item">
-                <h4>Competitions Round 1</h4>
-                <p>11:30 AM - 12:30 PM | Seminar Halls & Idea Labs</p>
+                <h4>Panel Discussion</h4>
+                <p>11:30 AM - 12:30 PM</p>
             </div>
             <div class="schedule-item">
-                <h4>Lunch & Expo</h4>
-                <p>12:30 PM - 1:10 PM | Block-2 Arena</p>
+                <h4>Lunch & Expo Continues</h4>
+                <p>12:30 PM - 1:30 PM</p>
             </div>
             <div class="schedule-item">
-                <h4>Competitions Round 2: IPL Auction, Board Room, Virtual Stock Market</h4>
-                <p>1:30 PM - 3:00 PM | Seminar Halls & Idea Labs</p>
+                <h4>Competitions</h4>
+                <p>1:30 PM - 3:30 PM</p>
             </div>
             <div class="schedule-item">
                 <h4>Standup Comedy Show</h4>
-                <p>3:00 PM - 3:40 PM | Central Auditorium</p>
+                <p>3:30 PM - 4:30 PM</p>
             </div>
             <div class="schedule-item">
-                <h4>Prize Distribution & Closing Ceremony</h4>
-                <p>3:40 PM - 4:30 PM | Central Auditorium</p>
+                <h4>Closing Ceremony & Prize Distribution</h4>
+                <p>4:30 PM - 6:00 PM</p>
             </div>
         </div>
     </section>
@@ -473,26 +518,23 @@
         <div class="ticket-grid">
             <div class="ticket-card">
                 <h3>Day 1 Pass</h3>
-                <div class="price">₹149</div>
+                <div class="price">₹150</div>
                 <p>Access to all Day 1 events</p>
-                <button class="cta-button" onclick="window.location.href='buy_tickets.html'">Buy Now</button>
-            </div>
-            <div class="ticket-card">
-                <h3>Day 2 Pass</h3>
-                <div class="price">₹149</div>
-                <p>Access to all Day 2 events</p>
+                <p>500 passes available</p>
                 <button class="cta-button" onclick="window.location.href='buy_tickets.html'">Buy Now</button>
             </div>
             <div class="ticket-card">
                 <h3>Full Event Pass</h3>
                 <div class="price">₹250</div>
                 <p>Access to both Day 1 & 2 events</p>
+                <p>500 passes available</p>
                 <button class="cta-button" onclick="window.location.href='buy_tickets.html'">Buy Now</button>
             </div>
             <div class="ticket-card">
-                <h3>Competition Entry</h3>
-                <div class="price">₹100</div>
-                <p>Entry for 1 competition</p>
+                <h3>Day 2 Pass</h3>
+                <div class="price">₹200</div>
+                <p>Access to all Day 2 events</p>
+                <p>300 passes available</p>
                 <button class="cta-button" onclick="window.location.href='buy_tickets.html'">Buy Now</button>
             </div>
         </div>
@@ -500,19 +542,19 @@
 
     <section id="stalls">
         <h2 class="section-title">Stall Rentals</h2>
-        <div class="stall-grid">
-            <div class="stall-card">
-                <h3>Regular Stall (Startups)</h3>
-                <div class="price">₹2,000</div>
+        <div class="ticket-grid">
+            <div class="ticket-card">
+                <h3>Regular Stall</h3>
+                <div class="price">₹2,500</div>
                 <p>Standard exhibition space</p>
-                <p>7 stalls available</p>
+                <p>10 stalls available</p>
                 <button class="cta-button" onclick="window.location.href='buy_stalls.html'">Book Now</button>
             </div>
-            <div class="stall-card">
-                <h3>Food Stall</h3>
-                <div class="price">₹3,000</div>
-                <p>Premium location for food vendors</p>
-                <p>3 stalls available</p>
+            <div class="ticket-card">
+                <h3>Premium Stall</h3>
+                <div class="price">₹5,000</div>
+                <p>Premium location and larger space</p>
+                <p>10 stalls available</p>
                 <button class="cta-button" onclick="window.location.href='buy_stalls.html'">Book Now</button>
             </div>
         </div>
@@ -524,12 +566,6 @@
             <div class="competition-card">
                 <h3>IPL Auction</h3>
                 <p>Test your team building and budget management skills</p>
-                <div class="price">₹50</div>
-                <button class="cta-button" onclick="window.location.href='competitions.html'">Register</button>
-            </div>
-            <div class="competition-card">
-                <h3>Board Room</h3>
-                <p>Strategic decision-making and persuasion</p>
                 <div class="price">₹50</div>
                 <button class="cta-button" onclick="window.location.href='competitions.html'">Register</button>
             </div>
@@ -564,57 +600,40 @@
         <h2 class="section-title">Guest Speakers</h2>
         <div class="guest-grid">
             <div class="guest-card">
+                <h3 class="guest-name">Vamshi Kurapati</h3>
+                <p>Raw Talks</p>
+                <p>Entrepreneurship Journey & Insights</p>
+            </div>
+            <div class="guest-card">
                 <h3 class="guest-name">Nikhil Gunda</h3>
                 <p>Gear Head Motors</p>
                 <p>Innovation in Automotive Industry</p>
             </div>
             <div class="guest-card">
                 <h3 class="guest-name">Meraj Faheem</h3>
-                <p>EdVenture Park</p>
+                <p>Edventure Park</p>
                 <p>EdTech Revolution</p>
             </div>
             <div class="guest-card">
-                <h3 class="guest-name">Srinivas Rao</h3>
-                <p>T-Hub CEO</p>
-                <p>Bridging Startups, Corporates, and Government</p>
-            </div>
-            <div class="guest-card">
-                <h3 class="guest-name">Sita Pallacholla</h3>
-                <p>WE Hub CEO</p>
-                <p>Empowering Women Entrepreneurs</p>
-            </div>
-            <div class="guest-card">
-                <h3 class="guest-name">Vamshi Kurapati</h3>
-                <p>Raw Talks</p>
-                <p>Entrepreneurship Journey & Insights</p>
-            </div>
-            <div class="guest-card">
-                <h3 class="guest-name">Tharun Naik Kethavath</h3>
-                <p>Tharun Speaks</p>
-                <p>Marketing & Video Editing</p>
-            </div>
-            <div class="guest-card">
                 <h3 class="guest-name">Varun Mayya</h3>
-                <p>Avalon Labs</p>
                 <p>Entrepreneurship & Digital Innovation</p>
+                <p>Future of Work</p>
             </div>
         </div>
     </section>
 
     <section id="credits">
-        <p>💫 FROM THE HEART OF INNOVATION ❤️ CREATED WITH LOVE, ENGINEERED WITH PRECISION</p>
-        <p>by the talented Tech Team at I&E Club CMRCET</p>
-        <p>maintained by the visionary minds of legion.sourcecodes</p>
-        
-        <button id="surpriseButton">TRIGGER THE MAGIC</button>
+        <p>Developed with ❤️ from Tech Team at I&E Club CMRCET</p>
+        <p>Maintained by legion.sourcecodes</p>
+        <button id="surpriseButton">మాయను ప్రారంభించు</button>
     </section>
 
     <section id="ctfChallenge">
-        <p>Solve the CTF challenge to get a VIP pass for free!</p>
-        <p><strong>Stage 1:</strong> Decrypt this: <code id="rot13Hint">FRPERG_UBER_2025</code></p>
-        <input type="text" id="ctfInput" placeholder="Enter the decrypted hint here">
-        <button id="ctfButton">Submit</button>
-    </section>
+    <p>Solve the CTF challenge to get a VIP pass for free!</p>
+    <p><strong>Stage 1:</strong> Decrypt this: <code id="rot13Hint">FRPERG_UBER_2025</code></p>
+    <input type="text" id="ctfInput" placeholder="Enter the decrypted hint here">
+    <button id="ctfButton" onclick="checkCTFFlag()">Submit</button>
+</section>
 
     <script>
 
