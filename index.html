@@ -359,23 +359,23 @@
 
         /* Surprise */
         #surpriseButton {
-            padding: 1rem 2rem;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            color: #ffffff;
-            border: none;
-            border-radius: 30px;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
-        }
+    padding: 1rem 2rem;
+    background: #808080; /* A boring gray color */
+    color: #ffffff; /* White text for contrast */
+    border: none;
+    border-radius: 8px; /* Sharper corners (less rounded) */
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(128, 128, 128, 0.5); /* Subtle gray shadow */
+}
 
-        #surpriseButton:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.8);
-        }
+#surpriseButton:hover {
+    transform: scale(1.05); /* Slight scale effect on hover */
+    box-shadow: 0 0 15px rgba(128, 128, 128, 0.8); /* Slightly stronger shadow on hover */
+}
 
         /* CTF Challenge */
         #ctfChallenge {
