@@ -231,16 +231,98 @@
             gap: 2rem;
         }
 
-        .guest-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: var(--glass-shadow);
-        }
+/* Guest Card Styles */
+/* Guest Card Default State */
+.guest-card {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: var(--glass-shadow);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.guest-content {
+    transition: opacity 0.3s ease;
+}
+
+.guest-expanded {
+    display: none; /* Hide expanded content by default */
+}
+
+/* Expanded State (Full Screen) */
+.guest-card.expanded {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background: var(--dark-bg);
+    border-radius: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto; /* Allow scrolling if content is too long */
+}
+
+.guest-card.expanded .guest-expanded {
+    display: block; /* Show expanded content when card is expanded */
+}
+
+.guest-card.expanded .guest-content {
+    display: none; /* Hide summary content when card is expanded */
+}
+
+.guest-card.expanded .guest-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 2rem;
+    border: 2px solid var(--neon-purple);
+}
+
+.guest-card.expanded .guest-name {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.guest-card.expanded p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+/* Close Button for Expanded State */
+.close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--neon-blue);
+    color: var(--dark-bg);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.close-button:hover {
+    background: var(--neon-purple);
+}
 
         .guest-card:hover {
             transform: translateY(-5px);
@@ -601,26 +683,64 @@
         <h2 class="section-title">Guest Speakers</h2>
         <div class="guest-grid">
             <div class="guest-card">
-                <h3 class="guest-name">Vamshi Kurapati</h3>
-                <p>Raw Talks</p>
-                <p>Entrepreneurship Journey & Insights</p>
+                <div class="guest-content">
+                    <h3 class="guest-name">Vamshi Kurapati</h3>
+                    <p>Raw Talks</p>
+                    <p>Entrepreneurship Journey & Insights</p>
+                </div>
+                <div class="guest-expanded">
+                    <img src="https://m.media-amazon.com/images/I/415jM0q3e9L._SL500_.jpg" alt="Vamshi Kurapati" class="guest-image">
+                    <p>Vamshi Kurapati is a notable entrepreneur and business consultant based in Hyderabad, India. He is the founder of Raw Talks, a platform dedicated to sharing insights and knowledge with aspiring entrepreneurs through podcasts and discussions. Vamshi has a strong background in finance, having qualified as a Chartered Accountant, and he utilizes his expertise to mentor startups on growth strategies and performance marketing. As the Managing Director of Swio Corporate and a partner at HashPro Digital Marketing Academy, he focuses on building professional networks and providing valuable resources for business development</p>
+                </div>
             </div>
             <div class="guest-card">
-                <h3 class="guest-name">Nikhil Gunda</h3>
-                <p>Gear Head Motors</p>
-                <p>Innovation in Automotive Industry</p>
+                <div class="guest-content">
+                    <h3 class="guest-name">Nikhil Gunda</h3>
+                    <p>Gear Head Motors</p>
+                    <p>Innovation in Automotive Industry</p>
+                </div>
+                <div class="guest-expanded">
+                    <img src="https://turbocharged.in/wp-content/uploads/2023/09/interviewtitle.jpg" alt="Nikhil Gunda" class="guest-image">
+                    <p>Nikhil Gunda is the founder of Gear Head Motors, where he leads innovative projects within the automotive industry. His work emphasizes the integration of technology and sustainability in vehicle design and manufacturing. Nikhil is passionate about transforming the automotive landscape through cutting-edge innovations that enhance efficiency and reduce environmental impact.</p>
+                </div>
             </div>
             <div class="guest-card">
-                <h3 class="guest-name">Meraj Faheem</h3>
-                <p>Edventure Park</p>
-                <p>EdTech Revolution</p>
+                <div class="guest-content">
+                    <h3 class="guest-name">Meraj Faheem</h3>
+                    <p>Edventure Park</p>
+                    <p>EdTech Revolution</p>
+                </div>
+                <div class="guest-expanded">
+                    <img src="https://i.ytimg.com/vi/yCgbd5CPUkk/maxresdefault.jpg" alt="Meraj Faheem" class="guest-image">
+                    <p>Meraj Faheem is an influential figure in the EdTech sector as the founder of Edventure Park. He is dedicated to revolutionizing education through technology, focusing on creating engaging learning experiences that cater to diverse student needs. Meraj's initiatives aim to bridge gaps in traditional education systems by leveraging digital tools to enhance accessibility and learning outcomes.</p>
+                </div>
             </div>
             <div class="guest-card">
-                <h3 class="guest-name">Varun Mayya</h3>
-                <p>Entrepreneurship & Digital Innovation</p>
-                <p>Future of Work</p>
+                <div class="guest-content">
+                    <h3 class="guest-name">Varun Mayya</h3>
+                    <p>Entrepreneurship & Digital Innovation</p>
+                    <p>Future of Work</p>
+                </div>
+                <div class="guest-expanded">
+                    <img src="https://images.yourstory.com/cs/images/people/043-1592305758590.jpg?format=auto&w=1920&q=75" alt="Varun Mayya" class="guest-image">
+                    <p>Varun Mayya is an entrepreneur known for his contributions to digital innovation and entrepreneurship. He explores the evolving landscape of work, emphasizing how technology shapes business practices and workforce dynamics. Varun's insights into the future of work inspire many to adapt and thrive in an increasingly digital world.</p>
+                </div>
             </div>
-        </div>
+            <!--
+<div class="guest-card">
+    <div class="guest-content">
+        <h3 class="guest-name">T-Hub CEO</h3>
+        <p>T-Hub</p>
+        <p>Fostering Entrepreneurship & Innovation</p>
+    </div>
+    <div class="guest-expanded">
+        <img src="https://assets.thehansindia.com/h-upload/2022/05/28/1294748-t-hub-ceo.webp" alt="T-Hub CEO" class="guest-image">
+        <p>The current CEO of T-Hub is Srinivas Mahankali Rao, commonly known as MSR. He has been instrumental in shaping T-Hub into a leading innovation hub since his appointment in October 2021. With over 37 years of experience in the IT industry, MSR has held various significant roles, including co-founder and CEO of Aujas Networks and Chief Operating Officer at Network Solutions Pvt. Ltd., an IBM company. His extensive background in technology and entrepreneurship equips him with the insights necessary to foster a thriving startup ecosystem.
+            Under MSR's leadership, T-Hub has expanded its mission to support startups at all stages of their development, from ideation to revenue generation. He emphasizes the importance of creating a collaborative environment that connects startups with corporates, investors, and academic institutions. This approach not only enhances innovation but also drives economic growth in the region. MSR has set ambitious goals for T-Hub, aiming to support over 6,000 tech startups in the next five years while generating approximately 50,000 jobs. His vision includes building international partnerships to help Indian startups scale globally.
+            MSR's commitment to nurturing sustainable businesses is evident in T-Hub's programs, which have already supported over 2,000 startups that collectively raised $2.5 billion in funding. His focus on increasing the survival rate of these startups reflects his dedication to ensuring they not only launch successfully but also thrive in competitive markets. As T-Hub continues to evolve under his guidance, MSR remains a pivotal figure in transforming Hyderabad into a world-class entrepreneurial ecosystem</p>
+    </div>
+</div>
+-->
     </section>
 
     <section id="credits">
@@ -850,6 +970,44 @@ window.addEventListener('load', applyDynamicPricing);
         alert("Incorrect flag. Try again!");
     }
 }
+document.addEventListener('DOMContentLoaded', () => {
+    const guestCards = document.querySelectorAll('.guest-card');
+
+    guestCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!card.classList.contains('expanded')) {
+                // Close all other expanded cards
+                guestCards.forEach(otherCard => {
+                    if (otherCard !== card && otherCard.classList.contains('expanded')) {
+                        otherCard.classList.remove('expanded');
+                    }
+                });
+                // Expand the clicked card
+                card.classList.add('expanded');
+            }
+        });
+
+        // Add a close button dynamically
+        const closeButton = document.createElement('button');
+        closeButton.classList.add('close-button');
+        closeButton.innerHTML = '&times;';
+        closeButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            card.classList.remove('expanded');
+        });
+        card.appendChild(closeButton);
+    });
+
+    // Minimize card when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.guest-card')) {
+            guestCards.forEach(card => {
+                card.classList.remove('expanded');
+            });
+        }
+    });
+});
         
     </script>
 </body>
