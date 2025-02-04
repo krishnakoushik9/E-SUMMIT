@@ -4,114 +4,161 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rent Stalls - CMRCET E-Summit 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+        :root {
+            --bg-primary: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #555555;
+            --border-color: #e0e0e0;
+            --accent-color: #000000;
+        }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
-            background-color: #0a0a0f;
-            color: #ffffff;
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            padding: 1rem;
         }
 
-        .stall-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 2rem;
-            width: 90%;
+        .payment-container {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            width: 100%;
             max-width: 500px;
             text-align: center;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
-            font-family: 'Orbitron', sans-serif;
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-weight: 700;
             font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #00f2ff;
-            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
         }
 
         .stall-option {
+            background-color: #f9f9f9;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
             margin-bottom: 1.5rem;
+            text-align: left;
+            transition: all 0.3s ease;
         }
 
-        .stall-option h3 {
-            font-size: 1.5rem;
-            color: #00ff9d;
-            margin-bottom: 0.5rem;
+        .stall-option:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transform: translateY(-3px);
         }
 
-        .stall-option p {
-            font-size: 1rem;
-            color: #ffffff;
+        .stall-option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 1rem;
         }
 
-        .stall-option button {
-            padding: 0.5rem 1rem;
-            background: linear-gradient(45deg, #00f2ff, #b300ff);
-            color: #ffffff;
+        .stall-option h3 {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .stall-option .price {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .stall-option p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .book-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--accent-color);
+            color: white;
             border: none;
-            border-radius: 30px;
-            font-family: 'Orbitron', sans-serif;
+            border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: background-color 0.3s ease;
+            font-family: 'Inter', sans-serif;
         }
 
-        .stall-option button:hover {
-            transform: scale(1.05);
+        .book-button:hover {
+            background-color: #333333;
         }
 
-        .back-button {
-            margin-top: 1rem;
-        }
-
-        .back-button a {
-            color: #00f2ff;
+        .back-link {
+            display: block;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
             text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
-        .back-button a:hover {
+        .back-link:hover {
+            color: var(--text-primary);
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="stall-container">
-        <h1>Rent Stalls</h1>
+    <div class="payment-container">
+        <div class="header">
+            <h1>Rent Stalls</h1>
+        </div>
+        
         <div class="stall-option">
-            <h3>Regular Stall</h3>
-            <p>Standard exhibition space</p>
-            <button onclick="rentStall('Regular Stall')">Book Now</button>
+            <div class="stall-option-header">
+                <h3>Regular Stall</h3>
+                <span class="price">₹2,000</span>
+            </div>
+            <p>Standard exhibition space with essential amenities</p>
+            <button class="book-button" onclick="rentStall('Regular Stall')">Book Now</button>
         </div>
+        
         <div class="stall-option">
-            <h3>Premium Stall</h3>
-            <p>Premium location and larger space</p>
-            <button onclick="rentStall('Premium Stall')">Book Now</button>
+            <div class="stall-option-header">
+                <h3>Premium Stall</h3>
+                <span class="price">₹3,000</span>
+            </div>
+            <p>Prime location with enhanced space and visibility</p>
+            <button class="book-button" onclick="rentStall('Premium Stall')">Book Now</button>
         </div>
-        <div class="back-button">
-            <a href="index.html">Back to Main Page</a>
-        </div>
+        
+        <a href="index.html" class="back-link">← Back to Main Page</a>
     </div>
 
     <script>
         function rentStall(stallType) {
-            alert(`You have successfully rented the ${stallType}!`);
-            // Redirect to a payment gateway or confirmation page
+            // Simulating payment gateway redirect
+            alert(`Redirecting to secure payment for ${stallType}`);
+            // In a real implementation, this would integrate with a payment gateway
         }
     </script>
 </body>
